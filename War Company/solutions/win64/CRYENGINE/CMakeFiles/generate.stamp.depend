@@ -1,0 +1,18 @@
+# CMake generation dependency list for this directory.
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/CMakeLists.txt
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/Build.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/BuildLaunchers.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/CRYENGINE-MSVC.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/CommonMacros.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/CommonOptions.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/Configure.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/ConfigureChecks.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/CopyFilesToBin.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/DownloadSDKs.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/InitialSetup.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/Recode.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/Win32/share/cmake-3.22/Modules/CheckFunctionExists.c
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/Win32/share/cmake-3.22/Modules/CheckFunctionExists.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/modules/Boost.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/modules/WinPixEventRuntime.cmake
+C:/Users/Maxwell/AppData/Local/Programs/CRYENGINE Launcher/Engines/crytek/cryengine-57-lts/5.7.1/Tools/CMake/toolchain/windows/WindowsPC-MSVC.cmake

@@ -3,4 +3,5 @@
 
 #include <StdAfx.h>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/Components/Player.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/Components/StdComponent.cpp>
 

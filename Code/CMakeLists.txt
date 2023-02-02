@@ -22,29 +22,50 @@ add_sources("Code_uber.cpp"
 		"GamePlugin.h"
 		"StdAfx.h"
 )
+
+add_sources("CompanyUnits_uber.cpp"
+    PROJECTS WarCompany
+    SOURCE_GROUP "Company Units"
+        "CompanyUnit/CompanyUnit.h"
+        "CompanyUnit/CompanyUnit.cpp"
+        "CompanyUnit/CompanyClassModel.h"
+)
+
 add_sources("BattleFormation_uber.cpp"
     PROJECTS WarCompany
-    SOURCE_GROUP "BattleFormation"
-		"BattleFormation/AnchorPoint.cpp"
-		"BattleFormation/BattleLineSlot.cpp"
-		"BattleFormation/BattleLineSpline.cpp"
-		"BattleFormation/VertexPoint.cpp"
-		"BattleFormation/AnchorPoint.h"
-		"BattleFormation/BattleLineSlot.h"
-		"BattleFormation/BattleLineSpline.h"
-		"BattleFormation/ISplineControlPoint.h"
-		"BattleFormation/VertexPoint.h"
+    SOURCE_GROUP "Battle Formation"
+        "BattleFormation/IFormationUnit.h"
+        "BattleFormation/FormationSlot.cpp"
+        "BattleFormation/FormationSlot.h"
+        "BattleFormation/BlockFormation.cpp"
+        "BattleFormation/BlockFormation.h"
+    SOURCE_GROUP "Battle Formation/Formation Builder"
+        "BattleFormation/FormationBuilder/FormationBuilder.h"
+        "BattleFormation/FormationBuilder/FormationBuilder.cpp"
+        "BattleFormation/FormationBuilder/FormationBuildGroup.h"
+        "BattleFormation/FormationBuilder/FormationBuildGroup.cpp"
+    SOURCE_GROUP "Battle Formation/Formation Spline"
+        "BattleFormation/FormationSpline/AnchorPoint.cpp"
+        "BattleFormation/FormationSpline/AnchorPoint.h"
+		"BattleFormation/FormationSpline/BattleLineSplineComponent.cpp"
+		"BattleFormation/FormationSpline/BattleLineSplineComponent.h"
+		"BattleFormation/FormationSpline/ISplineControlPoint.h"
+		"BattleFormation/FormationSpline/VertexPoint.cpp"
+		"BattleFormation/FormationSpline/VertexPoint.h"
 )
+
 add_sources("Components_uber.cpp"
     PROJECTS WarCompany
     SOURCE_GROUP "Components"
 		"Components/Player.cpp"
 		"Components/Player.h"
+        "Components/StdComponent.cpp"
+        "Components/StdComponent.h"
 )
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/CVarOverrides.h")
     add_sources("NoUberFile"
-        PROJECTS Game
+        PROJECTS WarCompany
         SOURCE_GROUP "Root"
             "CVarOverrides.h"
     )
@@ -52,7 +73,7 @@ endif()
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/EngineDefineOverrides.h")
     add_sources("NoUberFile"
-        PROJECTS Game
+        PROJECTS WarCompany
         SOURCE_GROUP "Root"
             "EngineDefineOverrides.h"
     )

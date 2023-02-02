@@ -1,8 +1,18 @@
 {
+    "Asset Browser": {
+        "RecentImportPath": null
+    },
     "AssetFolderModel": {
         "AddedFolders": null
     },
     "FavoritesHelper": {
         "Asset Browser": null
+    },
+    "Level Editor": {
+        "Recent Files": [
+            "assets/levels/example/example.level",
+            "assets/levels/battletest/battletest.level",
+            "assets/levels/level/level.level"
+        ]
     }
 }

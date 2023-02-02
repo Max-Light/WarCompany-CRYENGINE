@@ -5101,6 +5101,84 @@
 		},
 		{
 			"type": "Level",
+			"guid": "0df83409-c8e1-b2c7-7cd3-9b4dae17bf02",
+			"name": "battletest",
+			"timestamp": 1675362528,
+			"files": [ "levels/battletest/battletest.level" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "levels/battletest.level.cryasset",
+			"details": [ ],
+			"dependencies": [
+				{
+					"path": "%ENGINE%/EngineAssets/Shading/default.env",
+					"usageCount": 1
+				},
+				{
+					"path": "%engine%/engineassets/icons/averagememoryusage.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/icons/highmemoryusage.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/icons/livepreview.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/icons/lowmemoryusage.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/fogvolumebox.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/fogvolumeellipsoid.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/oceaninto.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/oceanintolowspec.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/oceanoutof.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/oceanoutoflowspec.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/material_terrain_default.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/water/ocean_default.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/water/wateroceanbottom.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
+					"usageCount": 0
+				},
+				{ "path": "%engine%/engineassets/textures/grey.dds", "usageCount": 0 },
+				{
+					"path": "%engine%/engineassets/textures/skys/night/half_moon.dds",
+					"usageCount": 0
+				}
+			]
+		},
+		{
+			"type": "Level",
 			"guid": "6811d90d-6cbe-567e-2a78-7c127c666319",
 			"name": "example",
 			"timestamp": 1652893758,
@@ -5285,6 +5363,18 @@
 			"dependencies": [ ]
 		},
 		{
+			"type": "Environment",
+			"guid": "f4b98230-e844-35ee-8702-ea74ea90f34f",
+			"name": "example",
+			"timestamp": 1663378189,
+			"files": [ "libs/environmentpresets/example.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "libs/environmentpresets/example.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
 			"type": "Xml",
 			"guid": "cb76a549-5754-013c-b706-c2f39ac64d5a",
 			"name": "example",
@@ -5324,7 +5414,7 @@
 			"type": "Material",
 			"guid": "4a7c7f60-6adb-0240-9a2e-56ae625226b5",
 			"name": "helper_illum",
-			"timestamp": 1652893758,
+			"timestamp": 1663437883,
 			"files": [ "objects/helper_illum.mtl" ],
 			"workFiles": [ ],
 			"source": "",
@@ -5336,7 +5426,7 @@
 			"dependencies": [
 				{
 					"path": "%engine%/EngineAssets/TextureMsg/color_white.dds",
-					"usageCount": 0
+					"usageCount": 1
 				}
 			]
 		},
@@ -5344,7 +5434,7 @@
 			"type": "Mesh",
 			"guid": "e7a6901a-3cda-838d-4af5-efde75291f8d",
 			"name": "sphere",
-			"timestamp": 1652893758,
+			"timestamp": 1663437883,
 			"files": [ "objects/sphere.cgf" ],
 			"workFiles": [ ],
 			"source": "",
@@ -5355,7 +5445,7 @@
 				{ "key": "triangleCount", "value": "232" },
 				{ "key": "vertexCount", "value": "272" }
 			],
-			"dependencies": [ { "path": "objects/helper_illum.mtl", "usageCount": 0 } ]
+			"dependencies": [ { "path": "objects/helper_illum.mtl", "usageCount": 1 } ]
 		},
 		{
 			"type": "Xml",

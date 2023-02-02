@@ -9,6 +9,6 @@
   <Detail name="16BitPrecision">false</Detail>
  </Details>
  <Dependencies>
-  <Path>./helper_illum.mtl</Path>
+  <Path usageCount="1">./helper_illum.mtl</Path>
  </Dependencies>
 </AssetMetadata>

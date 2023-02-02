@@ -3,7 +3,7 @@
 	"type": "",
 	"info": {
 		"name": "WarCompany",
-		"guid": "cf957e42-2f59-03e6-d8cf-b05b3f1ee178"
+		"guid": "F1911A85-3885-4850-BE77-FF66CABD812C"
 	},
 	"content": {
 		"assets": [ "Assets" ],
@@ -22,7 +22,7 @@
 			{ "guid": "", "type": "EType::Native", "path": "CryScaleformSchematyc" },
 			{ "guid": "", "type": "EType::Native", "path": "CrySensorSystem" },
 			{ "guid": "", "type": "EType::Native", "path": "CryPerceptionSystem" },
-			{ "guid": "", "type": "EType::Native", "path": "bin/win_x64/Game.dll" },
+			{ "guid": "", "type": "EType::Native", "path": "bin/win_x64/WarCompany.dll" },
 			{
 				"guid": "",
 				"type": "EType::Native",
@@ -31,6 +31,18 @@
 			}
 		]
 	},
-	"console_variables": { "sys_target_platforms": "pc,ps4,xboxone,linux" },
-	"console_commands": { }
+	"console_variables": 
+	[
+		{ 
+			"name": "sys_target_platforms",
+			"value": "pc,ps4,xboxone,linux" 
+		}
+	],
+	"console_commands": 
+	[
+		{ 
+			"name": "map", 
+			"value": "battletest" 
+		}
+	]
 }

@@ -18,12 +18,12 @@ class CGamePlugin
 {
 public:
 	CRYINTERFACE_SIMPLE(Cry::IEnginePlugin)
-	CRYGENERATE_SINGLETONCLASS_GUID(CGamePlugin, "Blank", "f01244b0-a4e7-4dc6-91e1-0ed18906fe7c"_cry_guid)
+	CRYGENERATE_SINGLETONCLASS_GUID(CGamePlugin, "WarCompany", "f01244b0-a4e7-4dc6-91e1-0ed18906fe7c"_cry_guid)
 
 	virtual ~CGamePlugin();
 	
 	// Cry::IEnginePlugin
-	virtual const char* GetCategory() const override { return "Game"; }
+	virtual const char* GetCategory() const override { return "War Company"; }
 	virtual bool Initialize(SSystemGlobalEnvironment& env, const SSystemInitParams& initParams) override;
 	// ~Cry::IEnginePlugin
 

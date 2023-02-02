@@ -3,6 +3,7 @@
 #include "GamePlugin.h"
 
 #include "Components/Player.h"
+#include "Components/StdComponent.h"
 
 #include <IGameObjectSystem.h>
 #include <IGameObject.h>
@@ -34,7 +35,6 @@ bool CGamePlugin::Initialize(SSystemGlobalEnvironment& env, const SSystemInitPar
 {
 	// Register for engine system events, in our case we need ESYSTEM_EVENT_GAME_POST_INIT to load the map
 	gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this, "CGamePlugin");
-	
 	return true;
 }
 
@@ -52,7 +52,7 @@ void CGamePlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lp
 			if (!gEnv->IsEditor())
 			{
 				// Load the example map in client server mode
-				gEnv->pConsole->ExecuteString("map example s", false, true);
+				gEnv->pConsole->ExecuteString("map battletest s", false, true);
 			}
 		}
 		break;

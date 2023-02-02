@@ -79,7 +79,7 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Crytek GmbH"
             VALUE "FileVersion", "1,0,0,0"
-            VALUE "LegalCopyright", "(C) 2022 Crytek GmbH"
+            VALUE "LegalCopyright", "(C) 2023 Crytek GmbH"
             VALUE "ProductName", "WarCompany"
             VALUE "ProductVersion", "1.0.0.0"
         END

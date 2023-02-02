@@ -2,8 +2,11 @@
 // This file is auto generated, do not manually edit it.
 
 #include <StdAfx.h>
-#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/AnchorPoint.cpp>
-#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/BattleLineSlot.cpp>
-#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/BattleLineSpline.cpp>
-#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/VertexPoint.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSlot.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/BlockFormation.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationBuilder/FormationBuilder.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationBuilder/FormationBuildGroup.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/AnchorPoint.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/BattleLineSplineComponent.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/VertexPoint.cpp>
 

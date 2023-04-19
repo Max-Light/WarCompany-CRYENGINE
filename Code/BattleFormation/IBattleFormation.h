@@ -20,7 +20,7 @@ struct IBattleFormation : public IEntityComponent
 
 	// Functions that spawn a slot require this parameter
 	// Contains all properties in order to spawn a slot
-	struct SSlotSpawnBaseParam
+	struct SSlotSpawnParams
 	{
 		Vec3 slotSize;
 		IFormationUnit* pUnit = nullptr;
@@ -38,22 +38,11 @@ struct IBattleFormation : public IEntityComponent
 	// Retrieve the total amount of slots in the formation
 	virtual uint GetSlotCount() const = 0;
 
-	// Parameters to be passed to the InsertColumnAndUnit function
-	struct SColumnUnitInsertionParam : public SSlotSpawnBaseParam
-	{
-		uint col;
-		EColumnShiftType shiftType = EColumnShiftType::Right;
-	};
 	// Inserts a new column in the formation containing the inserted unit
-	virtual IFormationSlot* InsertColumnAndUnit(SColumnUnitInsertionParam& insertionParams) = 0;
+	virtual IFormationSlot* InsertColumnAndUnit(uint col, SSlotSpawnParams& slotParams, EColumnShiftType shiftType) = 0;
 
-	struct SUnitInsertionParam : public SSlotSpawnBaseParam
-	{
-		uint col;
-		uint depth;
-	};
 	// Inserts a unit within the specified column
-	virtual IFormationSlot* InsertUnitInColumn(SUnitInsertionParam& insertionParams) = 0;
+	virtual IFormationSlot* InsertUnitInColumn(uint col, uint depth, SSlotSpawnParams& slotParams) = 0;
 
 	// Removes the slot at the specified index
 	virtual void RemoveSlot(uint x, uint y) = 0;

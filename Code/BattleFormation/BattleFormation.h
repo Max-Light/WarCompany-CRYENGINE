@@ -1,23 +1,15 @@
 #pragma once
 
 #include "IBattleFormation.h"
-#include "FormationSlot.h"
-#include "IFormationUnit.h"
-
+#include "BattleFormationColumn.h"
 
 class CBattleFormation : public IBattleFormation
 {
 public:
-	struct IFormationColumn
-	{
-		virtual float GetXPos() const = 0;
-		virtual float GetWidth() const = 0;
-	};
-
 	// shifts the position of columns up and down the formation line
 	struct IColumnVerticalityHandler
 	{
-		float GetColumnVerticalOffset(IFormationColumn* pColumn) const { return 0; }
+		float GetColumnVerticalOffset(IBattleFormationColumn* pColumn) const { return 0; }
 	};
 
 	struct IBattleFormationColumnObserver
@@ -28,38 +20,28 @@ public:
 			ColumnRemove,
 		};
 
-		virtual void OnFormationColumn(const EActionType& action, IFormationColumn* pColumn) = 0;
+		virtual void OnFormationColumn(const EActionType& action, IBattleFormationColumn* pColumn) = 0;
 	};
 protected:
-	class CFormationColumn : public IFormationColumn
+	using TColumnCollection = std::vector<CBattleFormationColumn>;
+	using TSlotCollection = CBattleFormationColumn::TSlotCollection;
+
+	struct SBattleFormationIterator
 	{
-	public:
-		using TSlotCollection = std::vector<CFormationSlot*>;
-	public:
-		CFormationColumn() = default;
-		virtual ~CFormationColumn() = default;
+		SBattleFormationIterator() = default;
+		SBattleFormationIterator(const TColumnCollection::iterator& colItr)
+			: colItr(colItr)
+			, slotItr(colItr->GetSlots()->begin())
+		{}
+		SBattleFormationIterator(const TColumnCollection::iterator& colItr, const TSlotCollection::iterator& slotItr)
+			: colItr(colItr)
+			, slotItr(slotItr)
+		{}
+		virtual ~SBattleFormationIterator() = default;
 
-		// IFormationColumn
-		virtual float GetXPos() const override { return m_xPosition; }
-		virtual float GetWidth() const override { return m_width; }
-		// ~IFormationColumn
-
-		// Return a pointer to the collection of slots in the column
-		const TSlotCollection* GetSlots() const { return &m_slots; }
-		TSlotCollection* GetSlots() { return &m_slots; }
-
-		// Set the x position of the column in the formation
-		void SetXPos(float xPos) { m_xPosition = xPos; }
-
-		// Set the width of the column
-		void SetWidth(float width) { m_width = width; }
-	protected:
-		TSlotCollection m_slots;
-		float m_xPosition = 0;
-		float m_width = 0;
+		TColumnCollection::iterator colItr;
+		TSlotCollection::iterator slotItr;
 	};
-	using TColumnCollection = std::vector<CFormationColumn>;
-	using TSlotCollection = CFormationColumn::TSlotCollection;
 public:
 	CBattleFormation() = default;
 	virtual ~CBattleFormation() = default;
@@ -83,8 +65,8 @@ public:
 	virtual uint GetColumnCount() const override { return m_formationColumns.size(); }
 	virtual uint GetSlotCountInColumn(uint col) const override { return m_formationColumns[col].GetSlots()->size(); }
 	virtual uint GetSlotCount() const override;
-	virtual IFormationSlot* InsertColumnAndUnit(SColumnUnitInsertionParam& insertionParams) override;
-	virtual IFormationSlot* InsertUnitInColumn(SUnitInsertionParam& insertionParams) override;
+	virtual IFormationSlot* InsertColumnAndUnit(uint col, SSlotSpawnParams& slotParams, EColumnShiftType shiftType = EColumnShiftType::Right) override;
+	virtual IFormationSlot* InsertUnitInColumn(uint col, uint depth, SSlotSpawnParams& slotParams) override;
 	virtual void RemoveSlot(uint x, uint y) override;
 	virtual void RemoveSlot(IFormationSlot* pSlot) override;
 	// ~IBattleFormation
@@ -95,14 +77,11 @@ public:
 	// Unregister a column verticality handler
 	void UnregisterColumnVerticalityHandler(IColumnVerticalityHandler* pHandler) { m_columnVerticalHandlers.erase(std::find(m_columnVerticalHandlers.begin(), m_columnVerticalHandlers.end(), pHandler)); }
 protected:
-	// Parameter to be passed to the SpawnSlot function
-	struct SSlotSpawnParams : public SSlotSpawnBaseParam
-	{
-		TColumnCollection::iterator colItr;
-		TSlotCollection::iterator slotItr;
-	};
 	// Spawns a slot local to the formation
-	CFormationSlot* SpawnSlot(const SSlotSpawnParams& slotParams);
+	CFormationSlot* SpawnSlot(const SSlotSpawnParams& slotParams, const Vec3& pos);
+
+	// Query the positional point where a slot would be placed in the formation grid
+	Vec3 QuerySlotPosition(const SBattleFormationIterator& itr, const SSlotSpawnParams& slotParams) const;
 
 	// Inserts a new column in the formation
 	TColumnCollection::iterator InsertColumnAt(TColumnCollection::iterator colItr, float columnWidth, const EColumnShiftType& shiftType);
@@ -117,7 +96,7 @@ protected:
 	void ShiftSlotsInColumn(TSlotCollection::iterator startItr, const TSlotCollection::iterator& endItr, float offset);
 
 	// Retrieve the column's vertical offset
-	float GetColumnOffset(IFormationColumn* pColumn) const;
+	float GetColumnOffset(IBattleFormationColumn* pColumn) const;
 
 	// Returns the terrain point position local to the formation
 	Vec3 GetTerrainPosition(Vec2 gridPosition) const;

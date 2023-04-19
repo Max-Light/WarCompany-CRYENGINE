@@ -46,19 +46,31 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationUnit.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationSlot.h">
-      <Filter>Battle Formation</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.cpp">
       <Filter>Battle Formation</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationSlot.h">
+      <Filter>Battle Formation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormationColumn.cpp">
+      <Filter>Battle Formation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormationColumn.h">
+      <Filter>Battle Formation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IBattleFormationColumn.h">
+      <Filter>Battle Formation</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.cpp">
       <Filter>Battle Formation</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.h">
+      <Filter>Battle Formation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IBattleFormation.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationBuilder\FormationBuilder.h">
@@ -108,9 +120,6 @@
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\Components\StdComponent.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\BattleFormation\IBattleFormation.h">
-      <Filter>Battle Formation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

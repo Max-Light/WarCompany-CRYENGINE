@@ -290,7 +290,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Code\BattleFormation\IBattleFormation.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\GamePlugin.cpp" />
     <ClCompile Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -314,11 +313,15 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompanyClass.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompanyClass.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationUnit.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationSlot.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationSlot.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormationColumn.cpp" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormationColumn.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IBattleFormationColumn.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IBattleFormation.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationBuilder\FormationBuilder.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationBuilder\FormationBuilder.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationBuilder\FormationBuildGroup.h" />

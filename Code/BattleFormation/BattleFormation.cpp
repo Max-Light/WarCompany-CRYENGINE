@@ -6,6 +6,8 @@
 #include <CryCore/StaticInstanceList.h>
 #include <CryGame/IGameFramework.h>
 
+#include <CrySystem/IConsole.h>
+
 namespace
 {
 	static void RegisterBattleFormationComponent(Schematyc::IEnvRegistrar& registrar)
@@ -21,39 +23,15 @@ namespace
 
 void CBattleFormation::Initialize()
 {
-	SEntitySpawnParams troopParams;
-	troopParams.vPosition = Vec3(500, 500, 32);
-	IEntity* pEntity;
-	CTroopCompany* pTroopCom;
+	SSlotSpawnParams slotParams;
+	slotParams.pUnit = nullptr;
+	slotParams.slotSize = Vec3(5, 3, 2);
 
-	SColumnUnitInsertionParam colInsertParam;
-	colInsertParam.col = 0;
-	colInsertParam.pUnit = nullptr;
-	colInsertParam.slotSize = Vec3(5, 3, 2);
-
-	pEntity = gEnv->pEntitySystem->SpawnEntity(troopParams);
-	pTroopCom = pEntity->GetOrCreateComponent<CTroopCompany>();
-	InsertColumnAndUnit(colInsertParam);
-
-	pEntity = gEnv->pEntitySystem->SpawnEntity(troopParams);
-	pTroopCom = pEntity->GetOrCreateComponent<CTroopCompany>();
-	InsertColumnAndUnit(colInsertParam);
-
-	pEntity = gEnv->pEntitySystem->SpawnEntity(troopParams);
-	pTroopCom = pEntity->GetOrCreateComponent<CTroopCompany>();
-	InsertColumnAndUnit(colInsertParam);
-
-	pEntity = gEnv->pEntitySystem->SpawnEntity(troopParams);
-	pTroopCom = pEntity->GetOrCreateComponent<CTroopCompany>();
-	InsertColumnAndUnit(colInsertParam);
-
-	SUnitInsertionParam unitInsertParam;
-	unitInsertParam.col = 1;
-	unitInsertParam.depth = 1;
-	unitInsertParam.pUnit = nullptr;
-	unitInsertParam.slotSize = Vec3(5, 3, 2);
-
-	InsertUnitInColumn(unitInsertParam);
+	InsertColumnAndUnit(0, slotParams);
+	InsertColumnAndUnit(0, slotParams);
+	InsertColumnAndUnit(0, slotParams);
+	InsertColumnAndUnit(0, slotParams);
+	InsertUnitInColumn(1, 1, slotParams);
 }
 
 Cry::Entity::EventFlags CBattleFormation::GetEventMask() const
@@ -89,41 +67,30 @@ uint CBattleFormation::GetSlotCount() const
 	return slotCount;
 }
 
-IFormationSlot* CBattleFormation::InsertColumnAndUnit(SColumnUnitInsertionParam& insertionParams)
+IFormationSlot* CBattleFormation::InsertColumnAndUnit(uint col, SSlotSpawnParams& slotParams, EColumnShiftType shiftType)
 {
-	CRY_ASSERT(insertionParams.col <= GetColumnCount(), "Column is outside of formation insertion range!");
+	CRY_ASSERT(col <= GetColumnCount(), "Column is outside of formation insertion range!");
 
-	TColumnCollection::iterator colItr = m_formationColumns.begin() + insertionParams.col;
-	colItr = InsertColumnAt(colItr, insertionParams.slotSize.x, insertionParams.shiftType);
+	TColumnCollection::iterator colItr = m_formationColumns.begin() + col;
+	colItr = InsertColumnAt(colItr, slotParams.slotSize.x, shiftType);
+	SBattleFormationIterator formItr = SBattleFormationIterator(colItr);
+	CFormationSlot* pSlot = SpawnSlot(slotParams, QuerySlotPosition(formItr, slotParams));
 
-	SSlotSpawnParams slotParams;
-	slotParams.slotSize = insertionParams.slotSize;
-	slotParams.pUnit = insertionParams.pUnit;
-	slotParams.colItr = colItr;
-	slotParams.slotItr = (*colItr).GetSlots()->begin();
-	CFormationSlot* pSlot = SpawnSlot(slotParams);
-
-	colItr->GetSlots()->insert(slotParams.slotItr, pSlot);
+	formItr.colItr->GetSlots()->insert(formItr.slotItr, pSlot);
 	return pSlot;
 }
 
-IFormationSlot* CBattleFormation::InsertUnitInColumn(SUnitInsertionParam& insertionParams)
+IFormationSlot* CBattleFormation::InsertUnitInColumn(uint col, uint depth, SSlotSpawnParams& slotParams)
 {
-	CRY_ASSERT(insertionParams.col < GetColumnCount(), "Column is outside of formation range!");
-	CRY_ASSERT(insertionParams.depth <= GetSlotCountInColumn(insertionParams.col), "Depth is outside of formation insertion range!");
+	CRY_ASSERT(col < GetColumnCount(), "Column is outside of formation range!");
+	CRY_ASSERT(depth <= GetSlotCountInColumn(col), "Depth is outside of formation insertion range!");
 
-	TColumnCollection::iterator colItr = m_formationColumns.begin() + insertionParams.col;
-	TSlotCollection::iterator slotItr = colItr->GetSlots()->begin() + insertionParams.depth;
-	ShiftSlotsInColumn(slotItr, colItr->GetSlots()->end(), insertionParams.slotSize.y);
+	SBattleFormationIterator formItr = SBattleFormationIterator(m_formationColumns.begin() + col);
+	formItr.slotItr += depth;
+	ShiftSlotsInColumn(formItr.slotItr, formItr.colItr->GetSlots()->end(), slotParams.slotSize.y);
+	CFormationSlot* pSlot = SpawnSlot(slotParams, QuerySlotPosition(formItr, slotParams));
 
-	SSlotSpawnParams slotParams;
-	slotParams.slotSize = insertionParams.slotSize;
-	slotParams.pUnit = insertionParams.pUnit;
-	slotParams.colItr = colItr;
-	slotParams.slotItr = slotItr;
-	CFormationSlot* pSlot = SpawnSlot(slotParams);
-
-	colItr->GetSlots()->insert(slotParams.slotItr, pSlot);
+	formItr.colItr->GetSlots()->insert(formItr.slotItr, pSlot);
 	return pSlot;
 }
 
@@ -137,21 +104,13 @@ void CBattleFormation::RemoveSlot(IFormationSlot* pSlot)
 	
 }
 
-CFormationSlot* CBattleFormation::SpawnSlot(const SSlotSpawnParams& slotParams)
+CFormationSlot* CBattleFormation::SpawnSlot(const SSlotSpawnParams& slotParams, const Vec3& pos)
 {
-	float x = slotParams.colItr->GetXPos();
-	float y = GetColumnOffset(&*slotParams.colItr) - (slotParams.slotSize.y / 2);
-	if (slotParams.slotItr != (*slotParams.colItr->GetSlots()).begin())
-	{
-		TSlotCollection::iterator prevSlotItr = slotParams.slotItr - 1;
-		y += (*prevSlotItr)->GetPos().y - ((*prevSlotItr)->GetSize().y / 2);
-	}
-
 	SEntitySpawnParams spawnParams;
 	spawnParams.pClass = gEnv->pEntitySystem->GetClassRegistry()->GetDefaultClass();
 	spawnParams.sName = "Formation Slot";
 	spawnParams.pParent = m_pEntity;
-	spawnParams.vPosition = GetTerrainPosition(Vec2(x, y));
+	spawnParams.vPosition = pos;
 
 	IEntity* pEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
 	CFormationSlot* pSlot = pEntity->GetOrCreateComponent<CFormationSlot>();
@@ -159,6 +118,18 @@ CFormationSlot* CBattleFormation::SpawnSlot(const SSlotSpawnParams& slotParams)
 	pSlot->SetSize(slotParams.slotSize);
 
 	return pSlot;
+}
+
+Vec3 CBattleFormation::QuerySlotPosition(const SBattleFormationIterator& itr, const SSlotSpawnParams& slotParams) const
+{
+	float x = itr.colItr->GetXPos();
+	float y = GetColumnOffset(&*itr.colItr) - (slotParams.slotSize.y / 2);
+	if (itr.slotItr != (*itr.colItr->GetSlots()).begin())
+	{
+		TSlotCollection::iterator prevSlotItr = itr.slotItr - 1;
+		y += (*prevSlotItr)->GetPos().y - ((*prevSlotItr)->GetSize().y / 2);
+	}
+	return GetTerrainPosition(Vec2(x, y));
 }
 
 CBattleFormation::TColumnCollection::iterator CBattleFormation::InsertColumnAt(TColumnCollection::iterator colItr, float columnWidth, const EColumnShiftType& shiftType)
@@ -222,7 +193,7 @@ void CBattleFormation::ShiftSlotsInColumn(TSlotCollection::iterator startItr, co
 	}
 }
 
-float CBattleFormation::GetColumnOffset(IFormationColumn* pColumn) const
+float CBattleFormation::GetColumnOffset(IBattleFormationColumn* pColumn) const
 {
 	float verticalOffset = 0;
 	for (IColumnVerticalityHandler* pHandler : m_columnVerticalHandlers)

@@ -1,0 +1,14 @@
+<Environment>
+ <Fog ViewDistance="8000" ViewDistanceLowSpec="1000" LDRGlobalDensMult="1.0"/>
+ <Terrain DetailLayersViewDistRatio="1.0"/>
+ <EnvState WindVector="1,0,0" BreezeGeneration="0" BreezeStrength="1.f" BreezeMovementSpeed="8.f" BreezeVariation="1.f" BreezeLifeTime="15.f" BreezeCount="4" BreezeSpawnRadius="25.f" BreezeSpread="0.f" BreezeRadius="5.f" ConsoleMergedMeshesPool="2750" ShowTerrainSurface="1" SunShadowsMinSpec="1" SunShadowsAdditionalCascadeMinSpec="0" SunShadowsClipPlaneRange="256.0f" UseLayersActivation="0" SunLinkedToTOD="1"/>
+ <VolFogShadows Enable="0" EnableForClouds="0"/>
+ <CloudShadows CloudShadowTexture="" CloudShadowSpeed="0,0,0" CloudShadowTiling="1.0" CloudShadowBrightness="1.0" CloudShadowInvert="0"/>
+ <ParticleLighting AmbientMul="0.5" LightsMul="0.5" SunMul="1.0"/>
+ <SkyBox Material="Materials/Sky/Sky" MaterialLowSpec="Materials/Sky/Sky" Angle="0" Stretching="0.5"/>
+ <Ocean Material="EngineAssets/Materials/Water/Ocean_default" CausticDepth="8.0" CausticIntensity="1.0" CausticsTilling="1.0"/>
+ <OceanAnimation WindDirection="1.0" WindSpeed="4.0" WavesSpeed="1.0" WavesAmount="1.5" WavesSize="0.75"/>
+ <Moon Latitude="240.0" Longitude="45.0" Size="0.5" Texture="Textures/Skys/Night/half_moon.dds"/>
+ <HDRSetup BloomColor="255,255,255" BloomMul="1.0"/>
+ <DynTexSource Width="256" Height="256"/>
+</Environment>

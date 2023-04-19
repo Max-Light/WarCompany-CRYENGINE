@@ -1,0 +1,157 @@
+<Level WaterColor="16711680" SandboxVersion="3.5.0.1">
+ <View ViewerPos="214.21706,322.39453,63.637878" ViewerAngles="-0.41730177,0,-2.4641371"/>
+ <Grid Size="1" Scale="1" Enabled="1" MajorSize="10" AngleSnap="45" AngleSnapEnabled="0"/>
+ <SequenceGroup NextSequenceId="4" Name="root">
+  <ChildGroups />
+  <ChildSequences />
+ </SequenceGroup>
+ <Clouds Width="0" Height="0"/>
+ <Fog Fog="" Terrain="" EnvState="" VolFogShadows="" CloudShadows="" ParticleLighting="" SkyBox="" Ocean="" OceanAnimation="" Moon="" HDRSetup="" DynTexSource=""/>
+ <Missions Current="Mission0">
+  <Mission Name="Mission0" Description="" PlayerEquipPack="" MusicScript="" Script="" MissionTime="12:00">
+   <ObjectLayers LayerVersion="2" Current="Main" CurrentGUID="{1F0B04A9-DAB1-43BE-85C6-9DC029D4A5F0}">
+    <RootLayer Name="Main" GUID="{1F0B04A9-DAB1-43BE-85C6-9DC029D4A5F0}" FullName="Main" Hidden="0" Frozen="0" External="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" Expanded="1" IsDefaultColor="1" ID="0"/>
+   </ObjectLayers>
+   <Objects NumObjects="5">
+    <Object Type="TagPoint" Layer="Main" Id="{339D5D0D-DDA2-4217-8BC6-74A571BE2C65}" Name="TagPoint1" Pos="224,305,50" FloorNumber="-1" Rotate="1,0,0,0" ColorRGB="16711680" EntityClass="TagPoint"/>
+    <Object Type="NavigationArea" Layer="Main" Id="{DE55DD32-047F-4590-B100-7AF86E2DDA76}" Name="NavigationArea3" Pos="128,384,49" FloorNumber="-1" Rotate="1,0,0,0" ColorRGB="16743936" Height="10" Exclusion="0" DisplayFilled="0">
+     <AffectedAgentTypes MediumSizedCharacters="1" VehicleMedium="0"/>
+     <Points>
+      <Point Pos="0,0,0"/>
+      <Point Pos="0,-192,0"/>
+      <Point Pos="192,-192,0"/>
+      <Point Pos="192,0,0"/>
+     </Points>
+     <SoundData Side1="0" Side2="0" Side3="0" Side4="0" Roof="0" Floor="0"/>
+    </Object>
+    <Object Type="Entity" Layer="Main" Id="{C3CD624E-D7F5-4A81-881B-8003E64C20E8}" Name="Human1" Pos="224,271,50" FloorNumber="-1" Rotate="1,0,0,0" ColorRGB="65535" MatLayersMask="0" OutdoorOnly="0" CastShadow="1" CastShadowMinspec="1" LodRatio="100" ViewDistRatio="100" HiddenInGame="0" GlobalInSegmentedWorld="0" RecvWind="0" RenderNearest="0" NoStaticDecals="0" CreatedThroughPool="1" EntityClass="Human">
+     <Properties AnimPack="" awarenessOfPlayer="0" esBehaviorSelection="HumanGrunt" esBehaviorSelectionTree="" aibehavior_behaviour="" aicharacter_character="" eiColliderMode="0" esCommConfig="Human" commrange="15" bEnableHitReaction="1" equip_EquipmentPack="Player_Default" esFaction="Grunts" bFactionHostility="1" fFmodCharacterTypeParam="0" fileHitDeathReactionsParamsDataFile="Libs/HitDeathReactionsData/HitDeathReactions_SDKGrunt.xml" bInvulnerable="0" fileModel="objects/characters/human/sdk_player/sdk_player.cdf" nModelVariations="0" esModularBehaviorTree="SDK_Advanced_Grunt" esNavigationType="MediumSizedCharacters" bOverrideAllowLookAimStrafing="1" physicMassMult="1" rank="4" reaction="1" soclasses_SmartObjectClass="Human, Actor" SoundPack="" SoundPackAlternative="" SpawnedEntityName="" bSpawner="0" TagList="" bUsable="0" bUseFacialFrameRateLimiting="1" UseMessage="" useSpecialMovementTransitions="1" esVoice="AI_01">
+      <AI sndDeathSound="" bPlayDeathSound="0" bUseRadioChatter="1"/>
+      <AIBehaviorFlags bGrenadier="0" bSniper="0"/>
+      <CharacterSounds foleyEffect="foley_player" footstepEffect="footstep_grunt" bFootstepGearEffect="0" footstepIndGearAudioSignal_Run="" footstepIndGearAudioSignal_Walk="" remoteFootstepEffect="footstep_grunt"/>
+      <Damage fileBodyDamage="Libs/BodyDamage/BodyDamage_Default.xml" fileBodyDamageParts="Libs/BodyDamage/Bodyparts_HumanMaleShared.xml" fileBodyDestructibility="Libs/BodyDamage/BodyDestructibility_HumanMaleShared.xml" CanFall="1" FallSleepTime="1" health="500" heatAbsobsion="0.5" heatDissipation="200" bLogDamages="0" minHeatDamage="100"/>
+      <Interest Angle="270" bInterested="1" MinInterestLevel="0"/>
+      <Perception audioScale="1" camoScale="1" cloakMaxDistCrouchedAndMoving="1.5" cloakMaxDistCrouchedAndStill="1.3" cloakMaxDistMoving="3" cloakMaxDistStill="2" collisionReactionScale="1" config="Human" FOVPrimary="80" FOVSecondary="160" heatScale="1" bIsAffectedByLight="0" minAlarmLevel="0" minDistanceToSpotDeadBodies="20" persistence="0" sightEnvScaleAlarmed="1" sightEnvScaleNormal="0.2" sightrange="70" sightrangeVehicle="-1" stanceScale="1.9" stuntReactionTimeOut="3" bThermalVision="0" velBase="1" velScale="0.03">
+       <TargetTracks classThreat="1" targetLimit="0"/>
+      </Perception>
+      <Physics>
+       <CollisionFiltering>
+        <collisionIgnore bT_collision_class_articulated="0" bT_collision_class_living="0" bT_collision_class_particle="0" bT_collision_class_soft="0" bT_collision_class_terrain="0" bT_collision_class_wheeled="0" bT_gcc_ai="0" bT_gcc_large_kickable="0" bT_gcc_player_body="0" bT_gcc_player_capsule="0" bT_gcc_ragdoll="0" bT_gcc_rigid="0" bT_gcc_vehicle="0" bT_gcc_vtol="0"/>
+        <collisionType bT_collision_class_articulated="0" bT_collision_class_living="0" bT_collision_class_particle="0" bT_collision_class_soft="0" bT_collision_class_terrain="0" bT_collision_class_wheeled="0" bT_gcc_ai="0" bT_gcc_large_kickable="0" bT_gcc_player_body="0" bT_gcc_player_capsule="0" bT_gcc_ragdoll="0" bT_gcc_rigid="0" bT_gcc_vehicle="0" bT_gcc_vtol="0"/>
+       </CollisionFiltering>
+      </Physics>
+      <PlayerInteractions bCanBeGrabbed="1" esGrabType="Human" bStealthKill="1"/>
+      <RateOfDeath accuracy="1" attackrange="70" reactionTime="1"/>
+      <Readability bIgnoreAnimations="0" bIgnoreVoice="0"/>
+      <Rendering bWrinkleMap="0"/>
+     </Properties>
+     <Properties2 bAlarmed="0" bAutoDisable="0" aibehavior_behaviour="" groupid="0" soclasses_SmartObjectClass="" nVariation="0" esVoice="">
+      <AI bGoBackToStartOnIdle="0" bGunner="0" bHostileIfAttacked="0"/>
+      <AITerritoryAndWave aiterritory_Territory="&lt;None&gt;" aiwave_Wave="&lt;None&gt;"/>
+      <Interest Angle="270" bInterested="1" MinInterestLevel="0" bOverrideArchetype="0"/>
+      <Readability bIgnoreAnimations="0" bIgnoreVoice="0" bOverrideArchetype="0"/>
+     </Properties2>
+    </Object>
+    <Object Type="Entity" Layer="Main" Id="{B63D7272-7929-4ECE-8ADC-CEAB353320CC}" Name="FlowgraphEntity1" Pos="224,274,50" FloorNumber="-1" Rotate="1,0,0,0" ColorRGB="65535" MatLayersMask="0" OutdoorOnly="0" CastShadow="1" CastShadowMinspec="1" LodRatio="100" ViewDistRatio="100" HiddenInGame="0" GlobalInSegmentedWorld="0" RecvWind="0" RenderNearest="0" NoStaticDecals="0" CreatedThroughPool="0" EntityClass="FlowgraphEntity">
+     <FlowGraph Description="" Group="AI_Move" enabled="1" MultiPlayer="ClientServer">
+      <Nodes>
+       <Node Id="1" Class="AI:GoTo" pos="-60,-160,0" flags="0" EntityGUID="{C3CD624E-D7F5-4A81-881B-8003E64C20E8}" EntityGUID_64="4A81D7F5C3CD624E">
+        <Inputs entityId="0" pos="224,305,50" distance="0" StopDistance="0" Run="1" Stance="4" Force="0" allowStrafing="0"/>
+       </Node>
+       <Node Id="2" Class="Game:Start" pos="-610,-140,0" flags="0">
+        <Inputs InGame="1" InEditor="1"/>
+       </Node>
+       <Node Id="5" Name="AI_walk_to_single_location" Class="_commentbox" pos="-100,-210.00038,0" flags="0">
+        <Inputs TextSize="1" Color="0.27451,0.352941,0.705882" DisplayFilled="1" DisplayBox="1" SortPriority="16"/>
+        <ResizeBorder X="0" Y="0" Width="420" Height="310"/>
+        <NodeSize Width="420" Height="337.39063"/>
+       </Node>
+       <Node Id="6" Name="This_is_the_most_basic_AI_move_you_can_make." Class="_comment" pos="-60,50,0" flags="0"/>
+       <Node Id="7" Name="Pos_has_been_manually_enterred_in_the_GoTo_node." Class="_comment" pos="-60,80,0" flags="0"/>
+       <Node Id="8" Class="AI:GoTo" pos="620,-160,0" flags="0" EntityGUID="{C3CD624E-D7F5-4A81-881B-8003E64C20E8}" EntityGUID_64="4A81D7F5C3CD624E">
+        <Inputs entityId="0" pos="224,305,50" distance="0" StopDistance="0" Run="2" Stance="2" Force="0" allowStrafing="0"/>
+       </Node>
+       <Node Id="10" Class="entity:TagPoint" pos="360,-110,0" flags="0" EntityGUID="{EE53EABC-9ECE-4A2D-9160-9EE0FFDB46E9}" EntityGUID_64="4A2D9ECEEE53EABC">
+        <Inputs entityId="0" pos="0,0,0" rotate="0,0,0" scale="0,0,0" CoordSys="1"/>
+       </Node>
+       <Node Id="11" Name="AI_continue_to_next_location" Class="_commentbox" pos="340,-210.0005,0" flags="0">
+        <Inputs TextSize="1" Color="0.27451,0.352941,0.705882" DisplayFilled="1" DisplayBox="1" SortPriority="16"/>
+        <ResizeBorder X="0" Y="0" Width="540" Height="310"/>
+        <NodeSize Width="540" Height="337.39063"/>
+       </Node>
+       <Node Id="12" Name="This_time_we&apos;ll_use_the_TagPoint_for_pos." Class="_comment" pos="360,80,0" flags="0"/>
+       <Node Id="13" Name="We&apos;ll_also_make_the_AI_run." Class="_comment" pos="650,80,0" flags="0"/>
+       <Node Id="14" Name="On_&apos;done&apos;_of_last_task,_sync_next_task_of_moving_to_next_location." Class="_comment" pos="360,50,0" flags="0"/>
+       <Node Id="15" Class="AISequence:Move" pos="290,300,0" flags="0" EntityGUID="{C3CD624E-D7F5-4A81-881B-8003E64C20E8}" EntityGUID_64="4A81D7F5C3CD624E">
+        <Inputs entityId="0" Speed="0" Stance="0" DestinationEntity="0" Position="224,305,50" Direction="0,0,0" EndDistance="0"/>
+       </Node>
+       <Node Id="17" Class="AISequence:Start" pos="-60,300,0" flags="0" EntityGUID="{C3CD624E-D7F5-4A81-881B-8003E64C20E8}" EntityGUID_64="4A81D7F5C3CD624E">
+        <Inputs entityId="0" Interruptible="1" ResumeAfterInterruption="1"/>
+       </Node>
+       <Node Id="18" Class="AISequence:Move" pos="580,300,0" flags="0" EntityGUID="{C3CD624E-D7F5-4A81-881B-8003E64C20E8}" EntityGUID_64="4A81D7F5C3CD624E">
+        <Inputs entityId="0" Speed="1" Stance="2" DestinationEntity="0" Position="224,305,50" Direction="0,0,0" EndDistance="0"/>
+       </Node>
+       <Node Id="20" Class="entity:TagPoint" pos="580,470,0" flags="0" EntityGUID="{EE53EABC-9ECE-4A2D-9160-9EE0FFDB46E9}" EntityGUID_64="4A2D9ECEEE53EABC">
+        <Inputs entityId="0" pos="0,0,0" rotate="0,0,0" scale="0,0,0" CoordSys="1"/>
+       </Node>
+       <Node Id="23" Class="AISequence:End" pos="870,300,0" flags="0" EntityGUID="{C3CD624E-D7F5-4A81-881B-8003E64C20E8}" EntityGUID_64="4A81D7F5C3CD624E">
+        <Inputs entityId="0"/>
+       </Node>
+       <Node Id="24" Name="AI_walk_to_single_location" Class="_commentbox" pos="-100,249.12999,0" flags="0">
+        <Inputs TextSize="1" Color="0.27451,0.352941,0.705882" DisplayFilled="1" DisplayBox="1" SortPriority="16"/>
+        <ResizeBorder X="0" Y="0" Width="620" Height="260"/>
+        <NodeSize Width="620" Height="287.39063"/>
+       </Node>
+       <Node Id="25" Name="All_Sequences_need_to_start_with_AISequence:Start" Class="_comment" pos="-60,400,0" flags="0"/>
+       <Node Id="26" Name="Basic_move_to_manually_entered_location." Class="_comment" pos="220,480,0" flags="0"/>
+       <Node Id="27" Name="AI_continue_to_next_location" Class="_commentbox" pos="540,249.12999,0" flags="0">
+        <Inputs TextSize="1" Color="0.27451,0.352941,0.705882" DisplayFilled="1" DisplayBox="1" SortPriority="16"/>
+        <ResizeBorder X="0" Y="0" Width="890" Height="430"/>
+        <NodeSize Width="890" Height="457.39063"/>
+       </Node>
+       <Node Id="28" Name="On_&apos;done&apos;_of_last_task,_sync_next_task_of_moving_to_next_location." Class="_comment" pos="580,630,0" flags="0"/>
+       <Node Id="29" Name="This_time_we&apos;ll_use_the_TagPoint_for_pos." Class="_comment" pos="580,660,0" flags="0"/>
+       <Node Id="30" Name="We&apos;ll_also_make_the_AI_run." Class="_comment" pos="870,660,0" flags="0"/>
+       <Node Id="34" Name="Notify_the_AI_system_that_the_sequence_has_ended_and_normal_duties_can_resume." Class="_comment" pos="870,360,0" flags="0"/>
+      </Nodes>
+      <Edges>
+       <Edge nodeIn="8" nodeOut="1" portIn="sink" portOut="done" enabled="1"/>
+       <Edge nodeIn="1" nodeOut="2" portIn="sink" portOut="output" enabled="0"/>
+       <Edge nodeIn="17" nodeOut="2" portIn="Start" portOut="output" enabled="1"/>
+       <Edge nodeIn="8" nodeOut="10" portIn="pos" portOut="pos" enabled="1"/>
+       <Edge nodeIn="18" nodeOut="15" portIn="Start" portOut="Done" enabled="1"/>
+       <Edge nodeIn="15" nodeOut="17" portIn="Start" portOut="Link" enabled="1"/>
+       <Edge nodeIn="23" nodeOut="18" portIn="End" portOut="Done" enabled="1"/>
+       <Edge nodeIn="18" nodeOut="20" portIn="Position" portOut="pos" enabled="1"/>
+      </Edges>
+      <GraphTokens />
+     </FlowGraph>
+    </Object>
+    <Object Type="TagPoint" Layer="Main" Id="{EE53EABC-9ECE-4A2D-9160-9EE0FFDB46E9}" Name="TagPoint2" Pos="261,305,50" FloorNumber="-1" Rotate="1,0,0,0" ColorRGB="16711680" EntityClass="TagPoint"/>
+   </Objects>
+   <Lighting SunRotation="240" SunHeight="80" Algorithm="3" Lighting="1" Shadows="1" ShadowIntensity="100" ILQuality="1" HemiSamplQuality="5" Longitude="90" DawnTime="355" DawnDuration="10" DuskTime="365" DuskDuration="10" SunVector="-0.51961523,-0.29999992,-0.80000001"/>
+   <Weapons>
+    <Used />
+    <Ammo />
+   </Weapons>
+   <MiniMap CenterX="512" CenterY="512" ExtendsX="512" ExtendsY="512" TexWidth="1024" TexHeight="1024"/>
+  </Mission>
+ </Missions>
+ <EntityPrototypesLibs>
+  <LevelLibrary Name="Level" SandboxVersion="3.5.0.1"/>
+ </EntityPrototypesLibs>
+ <PrefabsLibrary>
+  <LevelLibrary Name="Level"/>
+ </PrefabsLibrary>
+ <ParticleLibs>
+  <LevelLibrary Name="Level" SandboxVersion="3.5.0.1"/>
+ </ParticleLibs>
+ <MusicLibs>
+  <LevelLibrary Name="Level" SandboxVersion="3.5.0.1"/>
+ </MusicLibs>
+ <FlareLibs>
+  <LevelLibrary Name="Level" SandboxVersion="3.5.0.1"/>
+ </FlareLibs>
+ <LMCompiler UseSuperSampling="0" MaxDiffuseDepth="3" MaxSpecularDepth="3" numEmitPhotons="5000" PhotonEstimator="400" MinPhotonSearchRadius="0" MaxPhotonSearchRadius="9.9999997e-006" GridJitterBias="2.7" numIndirectSamples="400" MaxBrightness="3" FinalRegatharing="0" UseSunLight="0" numSunDirectSamples="2" numSunPhotons="5000" numDirectSamples="1" LightmapPageWidth="1024" LumenPerUnitU="8" eLightmapMode="1" MakeRAE="0" MakeOcclMap="0" MakeLightMap="0" MakeDistributedMap="0" numAmbientOcclusionSamples="0" fMinAmbientOcclusionSearchRadius="0.0099999998" fMaxAmbientOcclusionSearchRadius="1.5"/>
+ <NameSelection />
+</Level>

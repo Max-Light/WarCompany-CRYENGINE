@@ -5103,7 +5103,7 @@
 			"type": "Level",
 			"guid": "0df83409-c8e1-b2c7-7cd3-9b4dae17bf02",
 			"name": "battletest",
-			"timestamp": 1675362528,
+			"timestamp": 1681856422,
 			"files": [ "levels/battletest/battletest.level" ],
 			"workFiles": [ ],
 			"source": "",
@@ -5176,6 +5176,18 @@
 					"usageCount": 0
 				}
 			]
+		},
+		{
+			"type": "Level",
+			"guid": "8cbba49d-36e0-29b1-ae87-6986a795e5f8",
+			"name": "ai_test_basicnav",
+			"timestamp": 1678903891,
+			"files": [ "levels/battletest/AI_Test_BasicNav/AI_Test_BasicNav.level" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "levels/battletest/ai_test_basicnav.level.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
 		},
 		{
 			"type": "Level",

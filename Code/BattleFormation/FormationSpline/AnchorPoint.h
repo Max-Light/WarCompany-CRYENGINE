@@ -1,24 +1,14 @@
 #pragma once
 
-#include "ISplineControlPoint.h"
 
-
-class CVertexPoint;
-
-class CAnchorPoint : public ISplineControlPoint
+class CAnchorPoint 
 {
 public:
 	CAnchorPoint() = default;
 	virtual ~CAnchorPoint() = default;
 
-	// ISplineControlPoint implementation
-	virtual Vec3 GetPosition() const override { return m_position; }
-	virtual void SetPosition(const Vec3& position) override { m_position = position; }
-	// ~ISplineControlPoint implementation
-
-public:
-	static constexpr float s_anchorArmScaleLength = 0.33f;
-	static constexpr float s_maxAnchorAngle = 45;
+	Vec3 GetPosition() const { return m_position; }
+	void SetPosition(const Vec3& position) { m_position = position; }
 private:
 	Vec3 m_position;
 };

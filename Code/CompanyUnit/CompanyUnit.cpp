@@ -5,6 +5,11 @@
 #include <CryCore/StaticInstanceList.h>
 #include <CryRenderer/IRenderAuxGeom.h>
 
+#include <CryAISystem/IMovementSystem.h>
+#include <CryAISystem/MovementBlock.h>
+#include <CryAISystem/MovementRequest.h>
+#include <CryAISystem/MovementRequestID.h>
+#include <CryAISystem/IAISystem.h>
 
 namespace
 {
@@ -21,7 +26,7 @@ namespace
 
 void CCompanyUnit::Initialize()
 {
-
+	m_pNavAgent = m_pEntity->GetComponent<IEntityNavigationComponent>();
 }
 
 Cry::Entity::EventFlags CCompanyUnit::GetEventMask() const
@@ -36,8 +41,12 @@ void CCompanyUnit::ProcessEvent(const SEntityEvent& event)
 	case Cry::Entity::EEvent::Update:
 	{
 		gEnv->pAuxGeomRenderer->SetRenderFlags(SAuxGeomRenderFlags());
-		AABB boundingBox = AABB(m_pEntity->GetPos(), m_pEntity->GetPos() + Vec3(5, 3, 2));
-		gEnv->pAuxGeomRenderer->DrawAABB(boundingBox, true, ColorB(0, 0, 255), EBoundingBoxDrawStyle::eBBD_Faceted);
+		Vec3 halfSize = Vec3(3, 2, 1) / 2;
+		AABB boundingBox = AABB(m_pEntity->GetPos() - halfSize, m_pEntity->GetPos() + halfSize);
+		gEnv->pAuxGeomRenderer->DrawAABB(boundingBox, true, ColorB(0, 0, 25), EBoundingBoxDrawStyle::eBBD_Faceted);
+
+		m_pNavAgent->NavigateTo(Vec3(500, 500, 32));
+		
 	}
 	break;
 	}

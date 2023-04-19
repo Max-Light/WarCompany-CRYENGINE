@@ -3,4 +3,7 @@
 
 #include <StdAfx.h>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/CompanyUnit/CompanyUnit.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/CompanyUnit/TroopCompany/TroopUnit.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/CompanyUnit/TroopCompany/TroopCompany.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/CompanyUnit/TroopCompany/TroopCompanyClass.cpp>
 

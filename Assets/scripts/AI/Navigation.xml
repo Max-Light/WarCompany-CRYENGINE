@@ -1,0 +1,53 @@
+<Navigation version="1" >
+	
+	<AreaFlags>		
+		<!-- 
+		Default flags (with id 0 and 1) that automatically created in the code, its attributes (name and color) can be overwritten if needed
+		<Flag id="0" name="Walkable"/>		
+		<Flag id="1" name="Inaccessible"/>
+		-->
+		
+		<!-- Sample custom defined flags -->
+		<Flag id="2" name="Fire" color="255,0,0,127"/>
+		<Flag id="3" name="Door" color="255,255,0,127"/>
+		<Flag id="4" name="Disabled" color="64,0,0,127"/>
+		<Flag id="5" name="Crouch"/> 
+	</AreaFlags>
+	
+	<AreaTypes defaultColor="0,127,255,127">
+		<!-- 
+		Default Area Type (with id 0) is automatically created in the code, its parameters can be overwritten if needed
+		<AreaType id="0" name="Default" color="0,127,255,127">
+			<Flag>'Default flag'</Flag>
+		</AreaType>
+		-->
+		
+		<!-- Sample custom defined Area types -->
+		<AreaType id="1" name="Door Opened" color="255,255,0,127">
+			<Flag>Walkable</Flag>
+			<Flag>Door</Flag>
+		</AreaType>
+		<AreaType id="2" name="Door Closed" color="255,128,0,127">
+			<Flag>Walkable</Flag>
+			<Flag>Door</Flag>
+			<Flag>Disabled</Flag>
+		</AreaType>
+		<AreaType id="3" name="Fire" color="255,0,0,127">
+			<Flag>Walkable</Flag>
+			<Flag>Fire</Flag>
+		</AreaType>
+		<AreaType id="4" name="Dense Grass" color="0,255,0,127">
+			<Flag>Walkable</Flag>
+		</AreaType>
+		<AreaType id="5" name="Crouch" color="150,128,255,127">
+			<Flag>Crouch</Flag>
+		</AreaType>
+		
+	</AreaTypes>
+	
+	<AgentTypes>
+		<AgentType name="TroopCompany" voxelSize="0.125, 0.125, 0.125" radius="4" height="2" climbableHeight="3" climbableInclineGradient="1" climbableStepRatio="1" maxWaterDepth="8">
+		</AgentType>
+	</AgentTypes>
+	
+</Navigation>

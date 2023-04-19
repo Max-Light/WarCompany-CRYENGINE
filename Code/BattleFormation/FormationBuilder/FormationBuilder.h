@@ -4,7 +4,7 @@
 #include <CryPhysics/IPhysics.h>
 #include <CryString/HashedString.h>
 
-#include "BattleFormation/BlockFormation.h"
+#include "BattleFormation/BattleFormation.h"
 
 
 //class CFormationGroup

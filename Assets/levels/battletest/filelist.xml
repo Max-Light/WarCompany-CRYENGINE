@@ -1,6 +1,6 @@
 <download name="battletest" type="Map">
  <index src="filelist.xml" dest="filelist.xml"/>
  <files>
-  <file src="level.pak" dest="level.pak" size="11162916" md5="c4ee2fa41c487b55ab39fb15608e45a3"/>
+  <file src="level.pak" dest="level.pak" size="11163882" md5="3c8da3eb5bcf83e88792f3f6a21c38b7"/>
  </files>
 </download>

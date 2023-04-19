@@ -3,10 +3,10 @@
 
 #include <StdAfx.h>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSlot.cpp>
-#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/BlockFormation.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/BattleFormation.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationBuilder/FormationBuilder.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationBuilder/FormationBuildGroup.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/AnchorPoint.cpp>
-#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/BattleLineSplineComponent.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/BattleLineSpline.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/VertexPoint.cpp>
 

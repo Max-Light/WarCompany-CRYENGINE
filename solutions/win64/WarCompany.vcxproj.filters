@@ -20,15 +20,33 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\GamePlugin.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\StdAfx.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\CompanyUnit.h">
-      <Filter>Company Units</Filter>
+      <Filter>Company Unit</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\CompanyUnit.cpp">
-      <Filter>Company Units</Filter>
+      <Filter>Company Unit</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\CompanyClassModel.h">
-      <Filter>Company Units</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopUnit.h">
+      <Filter>Company Unit\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopUnit.cpp">
+      <Filter>Company Unit\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompany.h">
+      <Filter>Company Unit\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompany.cpp">
+      <Filter>Company Unit\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompanyClass.h">
+      <Filter>Company Unit\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompanyClass.cpp">
+      <Filter>Company Unit\Troop Company</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationUnit.h">
+      <Filter>Battle Formation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationSlot.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.cpp">
@@ -37,10 +55,10 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BlockFormation.cpp">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.cpp">
       <Filter>Battle Formation</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BlockFormation.h">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationBuilder\FormationBuilder.h">
@@ -61,19 +79,22 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\AnchorPoint.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSplineComponent.cpp">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.cpp">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSplineComponent.h">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\ISplineControlPoint.h">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IBattleLineSpline.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\VertexPoint.cpp">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\VertexPoint.h">
+      <Filter>Battle Formation\Formation Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IVertexPoint.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\Components\Player.cpp">
@@ -87,6 +108,9 @@
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\Components\StdComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Code\BattleFormation\IBattleFormation.h">
+      <Filter>Battle Formation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -107,8 +131,11 @@
     <Filter Include="Battle Formation\Formation Spline">
       <UniqueIdentifier>{FC10AB50-7D57-3097-8619-CBE391AC9D5E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Company Units">
-      <UniqueIdentifier>{9996385A-FBFC-360B-AF12-28FC635A8690}</UniqueIdentifier>
+    <Filter Include="Company Unit">
+      <UniqueIdentifier>{CE539C0D-9623-3C79-9756-FDB56C8E8D04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Company Unit\Troop Company">
+      <UniqueIdentifier>{192BF244-6186-31BF-9602-AEB3C5763A5D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{4B9370F2-D6AF-302B-8DC1-495BE70F7ED3}</UniqueIdentifier>

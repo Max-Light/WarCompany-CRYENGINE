@@ -9,18 +9,11 @@
 class CBattleLineSpline : public IBattleLineSpline
 {
 protected:
-	enum class ECurveMode : uint8
-	{
-		Linear = 0,
-		Quadratic = 1,
-		Cubic = 2
-	};
-
 	struct SCurveSegment
 	{
 		CAnchorPoint outAnchor;
 		CAnchorPoint inAnchor;
-		ECurveMode curveMode = ECurveMode::Linear;
+		ICurveSegment::ECurveMode curveMode = ICurveSegment::ECurveMode::Linear;
 	};
 protected:
 	using TVertexCollection = std::vector<CVertexPoint*>;
@@ -36,9 +29,9 @@ protected:
 		CCurveIterator() = default;
 		~CCurveIterator() = default;
 
-		TVertexCollection::iterator GetStartVertexIterator() const { return m_vertexItr; }
-		TVertexCollection::iterator GetEndVertexIterator() const { return m_vertexItr + 1; }
-		TCurveSegmentCollection::iterator GetCurveSegmentIterator() const { return m_curveSegmentItr; }
+		CVertexPoint* GetStartVertex() { return *m_vertexItr; }
+		CVertexPoint* GetEndVertex() { return *(m_vertexItr + 1); }
+		SCurveSegment* GetCurveSegment() { return *m_curveSegmentItr; }
 
 		CCurveIterator& operator++() 
 		{ 
@@ -110,8 +103,8 @@ public:
 	{
 		desc.SetGUID("{E1621D2E-AAAA-4D42-A112-E745C3CD46C7}"_cry_guid);
 		desc.SetEditorCategory("Battle Formation/Battle Line Spline");
-		desc.SetLabel("Spline");
-		desc.SetDescription("Control the shape of splineable battle formations.");
+		desc.SetLabel("Battle Line Spline");
+		desc.SetDescription("Creates a spline to shape battle formations");
 	}
 
 	// IEntityComponent
@@ -120,40 +113,38 @@ public:
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	// ~IEntityComponent
 
-	// return the starting curve iterator
+	// IBattleLineSpline
+	virtual void InsertCurve(IFormationColumn& column, float normalVal = 0.5f) override;
+	virtual void RemoveCurve(IVertexPoint& vertex, const ECurveDirection& dir = ECurveDirection::Right) override;
+	virtual void ApplyCurveMode(ICurveSegment& curveSegment, const ICurveSegment::ECurveMode& mode) override;
+	// ~IBattleLineSpline
+protected:
+	// Return the starting curve iterator
 	CCurveIterator GetStartCurve() { return CCurveIterator(m_vertexPoints.begin(), m_curveSegments.begin()); }
 
-	// return the ending curve iterator
+	// Return the ending curve iterator
 	CCurveIterator GetEndCurve() { return CCurveIterator(m_vertexPoints.end() - 1, m_curveSegments.end()); }
 
-	// returns the total amount of curves in the spline
-	uint GetCurveCount() const { return m_curveSegments.size(); }
+	// Returns the curve iterator where the vertex is found
+	CCurveIterator FindCurve(const CVertexPoint& vertex);
+	// Returns the curve iterator where the anchor is found
+	CCurveIterator FindCurve(const CAnchorPoint& anchor);
+	// Returns the curve iterator where the curve segment is found
+	CCurveIterator FindCurve(const SCurveSegment& curveSegment);
+	// Returns the curve iterator where the formation column belongs
+	CCurveIterator FindCurve(const IFormationColumn& column);
 
-	// return the out anchor offset
+	// Return the out anchor offset
 	Vec3 GetOutAnchorOffset(const CCurveIterator& curveItr) const;
 
-	// return the in anchor offset
+	// Return the in anchor offset
 	Vec3 GetInAnchorOffset(const CCurveIterator& curveItr) const;
+
+	// Return the curve length from start to end vertex points
+	float GetCurveLength(const CVertexPoint& start, const CVertexPoint& end) const;
 
 	// Calculate the position on the curve
 	Vec3 CalculateCurvePosition(const CCurveIterator& curveItr, float normalizedValue) const;
-
-	// get the curve length between two formation references
-	float GetColumnLength(const CVertexPoint::SFormationRef& start, const CVertexPoint::SFormationRef& end) const;
-
-	// inserts a new curve in the spline
-	void InsertCurve(CVertexPoint::SFormationRef& formationRef);
-
-	// removes a curve from the spline
-	// deletes the starting vertex and following curve segment
-	// does not delete the starting or ending vertex
-	void RemoveCurve(const CCurveIterator& curveItr);
-
-	// sets the curve mode at the specified curve index
-	void ApplyCurveMode(ECurveMode mode, const CCurveIterator& curveItr);
-
-	// returns the curve iterator where the relative formation position belongs
-	CCurveIterator FindCurve(const CVertexPoint::SFormationRef& formationRef);
 protected:
 	CBattleFormation* m_pFormation = nullptr;
 	TVertexCollection m_vertexPoints;

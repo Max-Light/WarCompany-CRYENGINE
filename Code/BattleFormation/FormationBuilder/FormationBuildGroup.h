@@ -11,7 +11,7 @@ public:
 	RectF GetRect() const { return m_rectangle; }
 	bool IntersectsWidth(float x) const;
 
-	void SetPosition(Vec2 position);
+	void SetPos(Vec2 position);
 private:
 	RectF m_rectangle;
 };

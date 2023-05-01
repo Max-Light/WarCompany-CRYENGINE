@@ -46,9 +46,21 @@ bool CFormationSlot::IsFormationReady() const
 	return false;
 }
 
-void CFormationSlot::SetPos(const Vec3& pos)
+void CFormationSlot::SetPos(const Vec2& gridPos)
 {
-	m_pEntity->SetPos(pos); 
+	float elevation = gEnv->p3DEngine->GetTerrainElevation(gridPos.x, gridPos.y);
+	Vec3 worldPos = Vec3(gridPos.x, gridPos.y, elevation);
+	m_pEntity->SetWorldTM(Matrix34::Create(m_pEntity->GetScale(), m_pEntity->GetRotation(), worldPos));
+}
+
+void CFormationSlot::OffsetPos(const Vec2& movement)
+{
+	SetPos(movement + m_pEntity->GetWorldPos());
+}
+
+void CFormationSlot::UpdatePos()
+{
+	SetPos(m_pEntity->GetWorldPos());
 }
 
 void CFormationSlot::SetSize(const Vec3& size)

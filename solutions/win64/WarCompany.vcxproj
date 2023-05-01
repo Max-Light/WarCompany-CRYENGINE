@@ -316,9 +316,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationSlot.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormationColumn.cpp" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormationColumn.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IBattleFormationColumn.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationColumn.cpp" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationColumn.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationColumn.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IBattleFormation.h" />
@@ -328,6 +328,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationBuilder\FormationBuildGroup.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\AnchorPoint.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\AnchorPoint.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IAnchorPoint.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IBattleLineSpline.h" />

@@ -55,13 +55,13 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationSlot.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormationColumn.cpp">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationColumn.cpp">
       <Filter>Battle Formation</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormationColumn.h">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationColumn.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IBattleFormationColumn.h">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationColumn.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\BattleFormation.cpp">
@@ -89,6 +89,9 @@
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\AnchorPoint.h">
+      <Filter>Battle Formation\Formation Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IAnchorPoint.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.cpp">

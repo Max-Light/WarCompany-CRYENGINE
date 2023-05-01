@@ -8,7 +8,7 @@ public:
 	virtual ~CAnchorPoint() = default;
 
 	Vec3 GetPosition() const { return m_position; }
-	void SetPosition(const Vec3& position) { m_position = position; }
+	void SetPos(const Vec3& position) { m_position = position; }
 private:
 	Vec3 m_position;
 };

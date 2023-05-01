@@ -1,7 +1,11 @@
 #pragma once
 
 #include <CryEntitySystem/IEntityComponent.h>
-#include "BattleFormation/IFormationSlot.h"
+
+#include "IFormationSlot.h"
+#include "IFormationColumn.h"
+
+class CColumnIterator;
 
 struct IBattleFormation : public IEntityComponent
 {
@@ -9,7 +13,7 @@ struct IBattleFormation : public IEntityComponent
 	{
 		desc.SetGUID("{1B7B07DB-DCEA-4A06-96EF-114DF4EE8B29}"_cry_guid);
 	}
-
+	
 	// Different shifting of columns within the formation
 	enum class EColumnShiftType
 	{
@@ -18,22 +22,20 @@ struct IBattleFormation : public IEntityComponent
 		Center
 	};
 
-	// Functions that spawn a slot require this parameter
-	// Contains all properties in order to spawn a slot
-	struct SSlotSpawnParams
-	{
-		Vec3 slotSize;
-		IFormationUnit* pUnit = nullptr;
-	};
-
-	// Retrieves the slot
+	// Retrieves the slot at the index
 	virtual IFormationSlot* GetSlot(uint x, uint y) const = 0;
+
+	// Retrieves the column at the index
+	virtual IFormationColumn* GetColumn(uint x) const = 0;
+
+	// Return the first iterator element of the column collection
+	virtual CColumnIterator GetBeginColumn() = 0;
+
+	// Return the last iterator element of the column collection
+	virtual CColumnIterator GetEndColumn() = 0;
 
 	// Retrieve the total amount of columns
 	virtual uint GetColumnCount() const = 0;
-
-	// Retrieve the slot count in the specified column
-	virtual uint GetSlotCountInColumn(uint col) const = 0;
 
 	// Retrieve the total amount of slots in the formation
 	virtual uint GetSlotCount() const = 0;

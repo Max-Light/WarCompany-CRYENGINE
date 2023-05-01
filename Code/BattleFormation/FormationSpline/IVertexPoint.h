@@ -1,22 +1,15 @@
 #pragma once
 
-#include "StdAfx.h"
+#include "BattleFormation/IFormationColumn.h"
 
 struct IVertexPoint : public IEntityComponent
 {
 	static void ReflectType(Schematyc::CTypeDesc<IVertexPoint>& desc)
 	{
-		desc.SetGUID("{75328B15-7614-49BE-A0C9-CBFAA20EBFF0}"_cry_guid);
-		desc.SetEditorCategory("Battle Formation/Battle Line Spline");
-		desc.SetLabel("Vertex Point");
+		desc.SetGUID("{D01691A4-23BF-4B7F-B71D-FB14BFD7BE81}"_cry_guid);
 	}
 
-	// IEntityComponent
-	virtual void Initialize() override = 0;
-	virtual Cry::Entity::EventFlags GetEventMask() const override = 0;
-	virtual void ProcessEvent(const SEntityEvent& event) override = 0;
-	// ~IEntityComponent
-
 	virtual Vec3 GetPosition() const = 0;
-	virtual void MoveToPosition(const Vec3& pos) = 0;
+	virtual IFormationColumn* GetColumn() const = 0;
+	virtual void MoveToPosition(const Vec3& gridPos) = 0;
 };

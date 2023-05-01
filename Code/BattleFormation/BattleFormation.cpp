@@ -32,6 +32,8 @@ void CBattleFormation::Initialize()
 	InsertColumnAndUnit(0, slotParams);
 	InsertColumnAndUnit(0, slotParams);
 	InsertUnitInColumn(1, 1, slotParams);
+	InsertUnitInColumn(3, 1, slotParams);
+	InsertColumnAndUnit(1, slotParams);
 }
 
 Cry::Entity::EventFlags CBattleFormation::GetEventMask() const
@@ -62,7 +64,7 @@ uint CBattleFormation::GetSlotCount() const
 	uint slotCount = 0;
 	for (auto colItr = m_formationColumns.begin(); colItr != m_formationColumns.end(); ++colItr)
 	{
-		slotCount += colItr->GetSlots()->size();
+		slotCount += (*colItr)->GetSlotCount();
 	}
 	return slotCount;
 }
@@ -71,26 +73,27 @@ IFormationSlot* CBattleFormation::InsertColumnAndUnit(uint col, SSlotSpawnParams
 {
 	CRY_ASSERT(col <= GetColumnCount(), "Column is outside of formation insertion range!");
 
-	TColumnCollection::iterator colItr = m_formationColumns.begin() + col;
+	ColumnCollection::iterator colItr = m_formationColumns.begin() + col;
 	colItr = InsertColumnAt(colItr, slotParams.slotSize.x, shiftType);
-	SBattleFormationIterator formItr = SBattleFormationIterator(colItr);
-	CFormationSlot* pSlot = SpawnSlot(slotParams, QuerySlotPosition(formItr, slotParams));
-
-	formItr.colItr->GetSlots()->insert(formItr.slotItr, pSlot);
+	CFormationColumn* pColumn = *colItr;
+	
+	auto slotPos = pColumn->QuerySlotPos(0, slotParams);
+	CFormationSlot* pSlot = SpawnSlot(slotParams, m_pEntity->GetWorldPos() + slotPos.gridPos);
+	pColumn->InsertSlot(slotPos.slotItr, pSlot);
 	return pSlot;
 }
 
 IFormationSlot* CBattleFormation::InsertUnitInColumn(uint col, uint depth, SSlotSpawnParams& slotParams)
 {
 	CRY_ASSERT(col < GetColumnCount(), "Column is outside of formation range!");
-	CRY_ASSERT(depth <= GetSlotCountInColumn(col), "Depth is outside of formation insertion range!");
+	ColumnCollection::iterator colItr = m_formationColumns.begin() + col;
+	CFormationColumn* pColumn = *colItr;
 
-	SBattleFormationIterator formItr = SBattleFormationIterator(m_formationColumns.begin() + col);
-	formItr.slotItr += depth;
-	ShiftSlotsInColumn(formItr.slotItr, formItr.colItr->GetSlots()->end(), slotParams.slotSize.y);
-	CFormationSlot* pSlot = SpawnSlot(slotParams, QuerySlotPosition(formItr, slotParams));
-
-	formItr.colItr->GetSlots()->insert(formItr.slotItr, pSlot);
+	CRY_ASSERT(depth <= pColumn->GetSlotCount(), "Depth is outside of formation insertion range!");
+	auto slotPos = pColumn->QuerySlotPos(depth, slotParams);
+	pColumn->ShiftSlotsAt(slotPos.slotItr, -slotParams.slotSize.y);
+	CFormationSlot* pSlot = SpawnSlot(slotParams, m_pEntity->GetWorldPos() + slotPos.gridPos);
+	pColumn->InsertSlot(slotPos.slotItr, pSlot);
 	return pSlot;
 }
 
@@ -104,13 +107,16 @@ void CBattleFormation::RemoveSlot(IFormationSlot* pSlot)
 	
 }
 
-CFormationSlot* CBattleFormation::SpawnSlot(const SSlotSpawnParams& slotParams, const Vec3& pos)
+CFormationSlot* CBattleFormation::SpawnSlot(const SSlotSpawnParams& slotParams, const Vec2& gridPos)
 {
+	float elevation = gEnv->p3DEngine->GetTerrainElevation(gridPos.x, gridPos.y);
+	Vec3 pos = Vec3(gridPos.x, gridPos.y, elevation);
+
 	SEntitySpawnParams spawnParams;
 	spawnParams.pClass = gEnv->pEntitySystem->GetClassRegistry()->GetDefaultClass();
 	spawnParams.sName = "Formation Slot";
 	spawnParams.pParent = m_pEntity;
-	spawnParams.vPosition = pos;
+	spawnParams.vPosition = pos - m_pEntity->GetWorldPos();
 
 	IEntity* pEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
 	CFormationSlot* pSlot = pEntity->GetOrCreateComponent<CFormationSlot>();
@@ -120,120 +126,76 @@ CFormationSlot* CBattleFormation::SpawnSlot(const SSlotSpawnParams& slotParams, 
 	return pSlot;
 }
 
-Vec3 CBattleFormation::QuerySlotPosition(const SBattleFormationIterator& itr, const SSlotSpawnParams& slotParams) const
+ColumnCollection::iterator CBattleFormation::InsertColumnAt(ColumnCollection::iterator colItr, float columnWidth, const EColumnShiftType& shiftType)
 {
-	float x = itr.colItr->GetXPos();
-	float y = GetColumnOffset(&*itr.colItr) - (slotParams.slotSize.y / 2);
-	if (itr.slotItr != (*itr.colItr->GetSlots()).begin())
-	{
-		TSlotCollection::iterator prevSlotItr = itr.slotItr - 1;
-		y += (*prevSlotItr)->GetPos().y - ((*prevSlotItr)->GetSize().y / 2);
-	}
-	return GetTerrainPosition(Vec2(x, y));
-}
+	ShiftColumnsAt(colItr, columnWidth, shiftType);
 
-CBattleFormation::TColumnCollection::iterator CBattleFormation::InsertColumnAt(TColumnCollection::iterator colItr, float columnWidth, const EColumnShiftType& shiftType)
-{
-	colItr = m_formationColumns.emplace(colItr);
+	CFormationColumn* pColumn = new CFormationColumn();
+	colItr = m_formationColumns.insert(colItr, pColumn);
 
 	float xPos = columnWidth / 2;
 	if (colItr != m_formationColumns.begin())
 	{
-		xPos += (colItr - 1)->GetXPos() + (colItr - 1)->GetWidth() / 2;
+		xPos += (*(colItr - 1))->GetXPos() + (*(colItr - 1))->GetWidth() / 2;
 	}
 
-	colItr->SetXPos(xPos);
-	colItr->SetWidth(columnWidth);
-	ShiftColumnsAt(colItr + 1, columnWidth, shiftType);
+	(*colItr)->SetXPos(xPos);
+	(*colItr)->SetWidth(columnWidth);
 	return colItr;
 }
 
-void CBattleFormation::ShiftColumnsAt(const TColumnCollection::iterator& colItr, float offset, const EColumnShiftType& shiftType)
+void CBattleFormation::ShiftColumnsAt(const ColumnCollection::iterator& colItr, float offset, const EColumnShiftType& shiftType)
 {
-	for (auto colCopyItr = colItr; colCopyItr != m_formationColumns.end(); ++colCopyItr)
-	{
-		colCopyItr->SetXPos(colItr->GetXPos() + offset);
-	}
-
 	switch (shiftType)
 	{
 	case EColumnShiftType::Left:
 		m_pEntity->SetPos(m_pEntity->GetPos() - m_pEntity->GetRightDir() * offset);
-		ShiftSlotsInColumnRange(m_formationColumns.begin(), colItr, offset);
+		ShiftColumnRange(colItr, m_formationColumns.end(), offset);
+		UpdateSlotsInColumnRange(m_formationColumns.begin(), colItr);
 		break;
 	case EColumnShiftType::Right:
-		ShiftSlotsInColumnRange(colItr, m_formationColumns.end(), offset);
+		ShiftColumnRange(colItr, m_formationColumns.end(), offset);
+		UpdateSlotsInColumnRange(colItr, m_formationColumns.end());
 		break;
 	case EColumnShiftType::Center:
-		m_pEntity->SetPos(m_pEntity->GetPos() - m_pEntity->GetRightDir() * colItr->GetWidth() / 2);
-		ShiftSlotsInColumnRange(m_formationColumns.begin(), m_formationColumns.end(), offset);
+		m_pEntity->SetPos(m_pEntity->GetPos() - m_pEntity->GetRightDir() * (*colItr)->GetWidth() / 2);
+		ShiftColumnRange(colItr, m_formationColumns.end(), offset);
+		UpdateSlotsInColumnRange(m_formationColumns.begin(), m_formationColumns.end());
 		break;
 	}
 }
 
-void CBattleFormation::ShiftSlotsInColumnRange(TColumnCollection::iterator startItr, const TColumnCollection::iterator& endItr, float offset)
+void CBattleFormation::ShiftColumnRange(ColumnCollection::iterator startItr, const ColumnCollection::iterator& endItr, float offset)
 {
 	for (startItr; startItr != endItr; ++startItr)
 	{
-		for (auto slotItr = startItr->GetSlots()->begin(); slotItr != startItr->GetSlots()->end(); ++slotItr)
+		CFormationColumn* pColumn = *startItr;
+		pColumn->SetXPos(pColumn->GetXPos() + offset);
+	}
+}
+
+void CBattleFormation::UpdateSlotsInColumnRange(ColumnCollection::iterator startItr, const ColumnCollection::iterator& endItr) 
+{
+	for (startItr; startItr != endItr; ++startItr)
+	{
+		CFormationColumn* pColumn = *startItr;
+		static auto slotPosUpdate = [this](CFormationSlot& slot)
 		{
-			CFormationSlot* pSlot = (*slotItr);
-			Vec2 gridPosition = pSlot->GetPos();
-			gridPosition.x += offset;
-			pSlot->SetPos(GetTerrainPosition(gridPosition));
-		}
+			slot.UpdatePos();
+		};
+		pColumn->IterateSlots(slotPosUpdate);
 	}
-}
-
-void CBattleFormation::ShiftSlotsInColumn(TSlotCollection::iterator startItr, const TSlotCollection::iterator& endItr, float offset)
-{
-	for (startItr; startItr != endItr; ++startItr)
-	{
-		(*startItr)->SetPos(GetTerrainPosition((*startItr)->GetPos() + Vec3(0, offset, 0)));
-	}
-}
-
-float CBattleFormation::GetColumnOffset(IBattleFormationColumn* pColumn) const
-{
-	float verticalOffset = 0;
-	for (IColumnVerticalityHandler* pHandler : m_columnVerticalHandlers)
-	{
-		verticalOffset += pHandler->GetColumnVerticalOffset(pColumn);
-	}
-	return verticalOffset;
-}
-
-Vec3 CBattleFormation::GetTerrainPosition(Vec2 gridPosition) const
-{
-	Vec3 formationWorldPos = m_pEntity->GetWorldPos();
-	gridPosition.x += formationWorldPos.x;
-	gridPosition.y += formationWorldPos.y;
-	float elevation = gEnv->p3DEngine->GetTerrainElevation(gridPosition.x, gridPosition.y);
-	Vec3 terrainPos = Vec3(gridPosition.x, gridPosition.y, elevation);
-
-	IPersistantDebug* pDebug = gEnv->pGameFramework->GetIPersistantDebug();
-	pDebug->Begin("Formation Slot Terrain Point", false);
-	pDebug->AddSphere(terrainPos, 1, ColorF(1, 0, 0), 5.0f);
-
-	return terrainPos - formationWorldPos;
 }
 
 void CBattleFormation::IterateSlots(std::function<void(CFormationSlot&)> func) const
 {
-	for (auto colItr = m_formationColumns.begin(); colItr != m_formationColumns.end(); ++colItr)
+	for (auto pColumn : m_formationColumns)
 	{
-		for (auto slotItr = colItr->GetSlots()->begin(); slotItr != colItr->GetSlots()->end(); ++slotItr)
-		{
-			func(**slotItr);
-		}
+		pColumn->IterateSlots(func);
 	}
 }
 
-void CBattleFormation::UpdateAllSlotPos() const
+void CBattleFormation::UpdateAllSlotPos() 
 {
-	static auto slotPosUpdate = [this](CFormationSlot& slot)
-	{
-		slot.SetPos(GetTerrainPosition(slot.GetPos()));
-	};
-	IterateSlots(slotPosUpdate);
+	UpdateSlotsInColumnRange(m_formationColumns.begin(), m_formationColumns.end());
 }

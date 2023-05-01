@@ -38,10 +38,22 @@ public:
 	virtual bool IsFormationReady() const override;
 	// ~IFormationSlot
 
-	void SetPos(const Vec3& position);
+	// Set the world position of the slot
+	void SetPos(const Vec2& gridPos);
+
+	// Offset the position of the slot
+	void OffsetPos(const Vec2& movement);
+
+	// Update the position of the slot
+	void UpdatePos();
+
+	// Set the size of the slot
 	void SetSize(const Vec3& size);
+
+	// Assign the unit occupying this slot
 	void AssignUnit(IFormationUnit* pUnit) { m_pUnit = pUnit; }
 protected:
 	IFormationUnit* m_pUnit = nullptr;
 	AABB m_boundingBox;
 };
+

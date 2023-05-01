@@ -8,5 +8,5 @@ struct IFormationUnit
 	virtual Vec3 GetWorldPos() const = 0;
 	virtual Vec3 GetSize() const = 0;
 	virtual AABB GetAABB() const = 0;
-	virtual void MoveInFormation(const Vec3& pos) = 0;
+	virtual void MoveInFormation(const Vec3& gridPos) = 0;
 };

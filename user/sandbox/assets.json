@@ -5103,7 +5103,7 @@
 			"type": "Level",
 			"guid": "0df83409-c8e1-b2c7-7cd3-9b4dae17bf02",
 			"name": "battletest",
-			"timestamp": 1681856422,
+			"timestamp": 1683246439,
 			"files": [ "levels/battletest/battletest.level" ],
 			"workFiles": [ ],
 			"source": "",
@@ -5174,7 +5174,8 @@
 				{
 					"path": "%engine%/engineassets/textures/skys/night/half_moon.dds",
 					"usageCount": 0
-				}
+				},
+				{ "path": "scripts/ai/factions.xml", "usageCount": 0 }
 			]
 		},
 		{

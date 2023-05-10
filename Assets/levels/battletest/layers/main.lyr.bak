@@ -1,5 +1,5 @@
 <ObjectLayer>
- <Layer Name="Main" FullName="Main" GUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1678906811">
+ <Layer Name="Main" FullName="Main" GUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1683054738">
   <LayerObjects>
    <Object Type="EmptyEntity" Layer="Main" LayerGUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Id="d24868a3-6ec7-3123-c67f-1f5cee5cc3a8" Name="Company Unit-1" Pos="510.93881,518.45239,32" Rotate="1,0,0,0" Scale="1,1,1" ColorRGB="65535" UseCustomLevelLayerColor="0" MinSpec="0" MatLayersMask="0" OutdoorOnly="0" CastShadow="1" CastShadowMinspec="1" DynamicDistanceShadows="0" GIMode="0" LodRatio="100" ViewDistRatio="100" HiddenInGame="0" RecvWind="0" RenderNearest="0" NoStaticDecals="0" EntityClass="Entity" HasEntity="1">
     <Properties />
@@ -8,9 +8,9 @@
       <properties />
      </Component>
      <Component CryXmlVersion="2" TypeGUID="1b988fa3-2cc8-4dfa-9107-a63aded77e91" TypeName="CEntityAINavigationComponent" GUID="98380f3f-48f7-91ce-20b9-a98be7c5ba6d" Name="" UserAdded="true">
-      <properties agent="TroopCompany" updateTransf="true">
+      <properties agent="TroopCompany" updateTransf="false">
        <IEntityNavigationComponent />
-       <movement normalSpeed="4" minSpeed="0" maxSpeed="6" maxAcceleration="4" maxDeceleration="6" lookAheadDistance="0.5" stopAtEnd="true"/>
+       <movement normalSpeed="4" minSpeed="0" maxSpeed="6" maxAcceleration="4" maxDeceleration="6" lookAheadDistance="5" stopAtEnd="true"/>
        <colavoid type="Active" radius="0.30000001" height="2"/>
        <queryFilter AreasCount="6">
         <AreaCost id="0" cost="1"/>
@@ -45,18 +45,20 @@
        <Physics WeightType="EWeightType::Mass" Density="9.9999997e-05" Mass="100"/>
       </properties>
      </Component>
-     <Component CryXmlVersion="2" TypeGUID="912c6ce8-56f7-4ffa-9134-f98d4e307bd6" TypeName="Cry::DefaultComponents::CRigidBodyComponent" GUID="66b5e9fb-e107-7c99-8aba-ce41cf29a338" Name="" UserAdded="true">
-      <properties Networked="false" EnabledByDefault="true" Resting="false" Type="Rigid" SendCollisionSignal="false">
-       <Buoyancy Damping="0" Density="1000" Resistance="1000"/>
-       <Simulation MaxTimeStep="0.02" SleepSpeed="0.039999999" Damping="0"/>
-      </properties>
-     </Component>
     </Components>
    </Object>
    <Object Type="EmptyEntity" Layer="Main" LayerGUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Id="07d9976d-6ae6-6ba1-40ee-ae0b0bd05254" Name="Formation" Pos="505.24454,513.97583,31.999756" Rotate="1,0,0,0" Scale="1,1,1" ColorRGB="65535" UseCustomLevelLayerColor="0" MinSpec="0" MatLayersMask="0" OutdoorOnly="0" CastShadow="1" CastShadowMinspec="1" DynamicDistanceShadows="0" GIMode="0" LodRatio="100" ViewDistRatio="100" HiddenInGame="0" RecvWind="0" RenderNearest="0" NoStaticDecals="0" EntityClass="Entity" HasEntity="1">
     <Properties />
     <Components>
      <Component CryXmlVersion="2" TypeGUID="4354c586-96b8-4d5f-8410-b1e845995bf0" TypeName="CBattleFormation" GUID="2fb3cd7a-705a-e371-fc52-e8231d6886b7" Name="" UserAdded="true">
+      <properties>
+       <IBattleFormation />
+      </properties>
+     </Component>
+     <Component CryXmlVersion="2" TypeGUID="e1621d2e-aaaa-4d42-a112-e745c3cd46c7" TypeName="CBattleLineSpline" GUID="ed8a113d-ada8-de8f-9c0c-251b5ffad5f2" Name="" UserAdded="true">
+      <properties />
+     </Component>
+     <Component CryXmlVersion="2" TypeGUID="183e3c84-2e08-4506-95fa-b362f7e735e9" TypeName="Cry::DefaultComponents::CInputComponent" GUID="9096f142-eb29-01b7-b690-1e1c9046c459" Name="" UserAdded="false">
       <properties />
      </Component>
     </Components>

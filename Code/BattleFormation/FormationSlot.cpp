@@ -60,7 +60,7 @@ void CFormationSlot::OffsetPos(const Vec2& movement)
 
 void CFormationSlot::UpdatePos()
 {
-	SetPos(m_pEntity->GetWorldPos());
+	SetPos(GetEntity()->GetWorldPos());
 }
 
 void CFormationSlot::SetSize(const Vec3& size)

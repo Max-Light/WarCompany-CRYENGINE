@@ -1,9 +1,19 @@
 #pragma once
 
-#include "StdAfx.h"
 #include "IVertexPoint.h"
+#include "IBattleLineSpline.h"
 
-class CVertexPoint : public IVertexPoint
+#include <CryEntitySystem/IEntityComponent.h>
+
+struct SVertexSpawnParams
+{
+	SVertexSpawnParams() = default;
+
+	IBattleLineSpline* pSpline = nullptr;
+	Vec2 gridPosition = ZERO;
+};
+
+class CVertexPoint : public IVertexPoint, public IEntityComponent
 {
 public:
 	CVertexPoint() = default;
@@ -11,9 +21,9 @@ public:
 
 	static void ReflectType(Schematyc::CTypeDesc<CVertexPoint>& desc)
 	{
-		desc.SetGUID("{75328B15-7614-49BE-A0C9-CBFAA20EBFF0}"_cry_guid);
-		desc.SetEditorCategory("Battle Formation/Battle Line Spline");
+		desc.SetGUID("{FF349F10-73BF-4653-965B-1C27F47CA957}"_cry_guid);
 		desc.SetLabel("Vertex Point");
+		desc.SetDescription("A vertex point attached to a battle line spline.");
 	}
 
 	// IEntityComponent
@@ -23,16 +33,15 @@ public:
 	// ~IEntityComponent
 
 	// IVertexPoint
-	virtual Vec3 GetPosition() const override { return m_position; }
-	virtual IFormationColumn* GetColumn() const { return m_pColumnRef; }
-	virtual void MoveToPosition(const Vec3& gridPos) override;
+	virtual Vec3 GetPos() const override { return GetEntity()->GetPos(); }
+	virtual float GetBattleLineXPos() const override { return GetEntity()->GetPos().x; }
 	// ~IVertexPoint
+	
+	// Set the position of the the vertex
+	void SetPos(const Vec2& gridPosition);
 
-	float GetNormalizedOffset() const { return m_normalizedOffset; }
-	void SetNormalizedOffset(float normalizedVal) { m_normalizedOffset = crymath::clamp(normalizedVal, 0.0f, 1.0f); }
-	void SetPos(const Vec3& gridPos) { m_position = gridPos; }
+	// Spawns a vertex point
+	static CVertexPoint* SpawnVertex(SVertexSpawnParams& vertexParams);
 private:
-	IFormationColumn* m_pColumnRef = nullptr;
-	float m_normalizedOffset;
-	Vec3 m_position;
+	IBattleLineSpline* m_pSpline = nullptr;
 };

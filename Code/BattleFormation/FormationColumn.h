@@ -16,6 +16,7 @@ public:
 	// IFormationColumn
 	virtual float GetXPos() const override { return m_xPos; }
 	virtual float GetWidth() const override { return m_width; }
+	virtual float GetYPos() const override { return 0; }
 	// ~IFormationColumn
 
 	// Return the beginning iterator

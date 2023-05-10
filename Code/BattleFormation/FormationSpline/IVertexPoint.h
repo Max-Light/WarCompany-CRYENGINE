@@ -2,14 +2,14 @@
 
 #include "BattleFormation/IFormationColumn.h"
 
-struct IVertexPoint : public IEntityComponent
+struct IVertexPoint 
 {
-	static void ReflectType(Schematyc::CTypeDesc<IVertexPoint>& desc)
-	{
-		desc.SetGUID("{D01691A4-23BF-4B7F-B71D-FB14BFD7BE81}"_cry_guid);
-	}
+	IVertexPoint() = default;
+	virtual ~IVertexPoint() = default;
 
-	virtual Vec3 GetPosition() const = 0;
-	virtual IFormationColumn* GetColumn() const = 0;
-	virtual void MoveToPosition(const Vec3& gridPos) = 0;
+	// Return the position of the vertex
+	virtual Vec3 GetPos() const = 0;
+
+	// Return the battle line x position local to the battle formation
+	virtual float GetBattleLineXPos() const = 0;
 };

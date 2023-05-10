@@ -94,15 +94,6 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IAnchorPoint.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.cpp">
-      <Filter>Battle Formation\Formation Spline</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.h">
-      <Filter>Battle Formation\Formation Spline</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IBattleLineSpline.h">
-      <Filter>Battle Formation\Formation Spline</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\VertexPoint.cpp">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
@@ -110,6 +101,24 @@
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IVertexPoint.h">
+      <Filter>Battle Formation\Formation Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\CurveLine.cpp">
+      <Filter>Battle Formation\Formation Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\CurveLine.h">
+      <Filter>Battle Formation\Formation Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\ICurveLine.h">
+      <Filter>Battle Formation\Formation Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.cpp">
+      <Filter>Battle Formation\Formation Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.h">
+      <Filter>Battle Formation\Formation Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\IBattleLineSpline.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\Components\Player.cpp">

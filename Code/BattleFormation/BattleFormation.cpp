@@ -78,7 +78,7 @@ IFormationSlot* CBattleFormation::InsertColumnAndUnit(uint col, SSlotSpawnParams
 	CFormationColumn* pColumn = *colItr;
 	
 	auto slotPos = pColumn->QuerySlotPos(0, slotParams);
-	CFormationSlot* pSlot = SpawnSlot(slotParams, m_pEntity->GetWorldPos() + slotPos.gridPos);
+	CFormationSlot* pSlot = SpawnSlot(slotParams, m_pEntity->GetPos() + slotPos.gridPos);
 	pColumn->InsertSlot(slotPos.slotItr, pSlot);
 	return pSlot;
 }
@@ -92,7 +92,7 @@ IFormationSlot* CBattleFormation::InsertUnitInColumn(uint col, uint depth, SSlot
 	CRY_ASSERT(depth <= pColumn->GetSlotCount(), "Depth is outside of formation insertion range!");
 	auto slotPos = pColumn->QuerySlotPos(depth, slotParams);
 	pColumn->ShiftSlotsAt(slotPos.slotItr, -slotParams.slotSize.y);
-	CFormationSlot* pSlot = SpawnSlot(slotParams, m_pEntity->GetWorldPos() + slotPos.gridPos);
+	CFormationSlot* pSlot = SpawnSlot(slotParams, m_pEntity->GetPos() + slotPos.gridPos);
 	pColumn->InsertSlot(slotPos.slotItr, pSlot);
 	return pSlot;
 }
@@ -107,6 +107,15 @@ void CBattleFormation::RemoveSlot(IFormationSlot* pSlot)
 	
 }
 
+Vec3 CBattleFormation::CreatePos(const Vec2& pos)
+{
+	Vec2 worldPos = GetPos() + (Vec3)pos * GetRotation();
+	float elevation = gEnv->p3DEngine->GetTerrainElevation(worldPos.x, worldPos.y);
+	float entityElevation = GetEntity()->GetWorldPos().z;
+	Vec3 newPos = pos + Vec3(0, 0, elevation - entityElevation);
+	return newPos;
+}
+
 CFormationSlot* CBattleFormation::SpawnSlot(const SSlotSpawnParams& slotParams, const Vec2& gridPos)
 {
 	float elevation = gEnv->p3DEngine->GetTerrainElevation(gridPos.x, gridPos.y);
@@ -116,7 +125,7 @@ CFormationSlot* CBattleFormation::SpawnSlot(const SSlotSpawnParams& slotParams, 
 	spawnParams.pClass = gEnv->pEntitySystem->GetClassRegistry()->GetDefaultClass();
 	spawnParams.sName = "Formation Slot";
 	spawnParams.pParent = m_pEntity;
-	spawnParams.vPosition = pos - m_pEntity->GetWorldPos();
+	spawnParams.vPosition = pos - m_pEntity->GetPos();
 
 	IEntity* pEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
 	CFormationSlot* pSlot = pEntity->GetOrCreateComponent<CFormationSlot>();

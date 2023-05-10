@@ -9,6 +9,7 @@ typedef std::vector<CFormationColumn*> ColumnCollection;
 class CColumnIterator
 {
 protected:
+	friend class CBattleFormation;
 	typedef ColumnCollection::iterator Iterator;
 public:
 	CColumnIterator() = default;
@@ -16,6 +17,8 @@ public:
 		: m_columnItr(colItr)
 	{}
 	~CColumnIterator() = default;
+
+	IFormationColumn* GetColumn() const { return *m_columnItr; }
 
 	IFormationColumn& operator*() const { return **m_columnItr; }
 	IFormationColumn* operator->() const { return *m_columnItr; }
@@ -49,16 +52,22 @@ public:
 	// ~IEntityComponent
 
 	// IBattleFormation
+	virtual Vec2 GetPos() const { return GetEntity()->GetWorldPos(); }
+	virtual Quat GetRotation() const { return GetEntity()->GetWorldRotation(); }
 	virtual IFormationSlot* GetSlot(uint x, uint y) const override { return (*m_formationColumns[x])[y]; }
 	virtual IFormationColumn* GetColumn(uint x) const override { return m_formationColumns[x]; }
 	virtual CColumnIterator GetBeginColumn() override { return CColumnIterator(m_formationColumns.begin()); }
 	virtual CColumnIterator GetEndColumn() override { return CColumnIterator(m_formationColumns.end()); }
 	virtual uint GetColumnCount() const override { return m_formationColumns.size(); }
 	virtual uint GetSlotCount() const override;
+	virtual Vec3 GetBattleLineDirection() const { return GetEntity()->GetRightDir() * GetBattleLineLength(); }
+	virtual float GetBattleLineLength() const override { return (*(--m_formationColumns.end()))->GetMaxXPos(); }
+	virtual bool IsEmpty() const { return m_formationColumns.empty(); }
 	virtual IFormationSlot* InsertColumnAndUnit(uint col, SSlotSpawnParams& slotParams, EColumnShiftType shiftType = EColumnShiftType::Right) override;
 	virtual IFormationSlot* InsertUnitInColumn(uint col, uint depth, SSlotSpawnParams& slotParams) override;
 	virtual void RemoveSlot(uint x, uint y) override;
 	virtual void RemoveSlot(IFormationSlot* pSlot) override;
+	virtual Vec3 CreatePos(const Vec2& pos) override;
 	// ~IBattleFormation
 protected:
 	// Spawns a slot local to the formation

@@ -39,7 +39,7 @@ void CStdComponent::ProcessEvent(const SEntityEvent& event)
     case Cry::Entity::EEvent::Update:
     {
         gEnv->pRenderer->GetIRenderAuxGeom()->SetRenderFlags(SAuxGeomRenderFlags());
-        gEnv->pRenderer->GetIRenderAuxGeom()->DrawSphere(m_pEntity->GetWorldPos(), 1, ColorB(0, 128, 128), false);
+        gEnv->pRenderer->GetIRenderAuxGeom()->DrawSphere(m_pEntity->GetPos(), 1, ColorB(0, 128, 128), false);
     }
     break;
     }

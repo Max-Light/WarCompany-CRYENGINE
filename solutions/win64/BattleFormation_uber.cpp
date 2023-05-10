@@ -8,6 +8,7 @@
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationBuilder/FormationBuilder.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationBuilder/FormationBuildGroup.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/AnchorPoint.cpp>
-#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/BattleLineSpline.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/VertexPoint.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/CurveLine.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/BattleLineSpline.cpp>
 

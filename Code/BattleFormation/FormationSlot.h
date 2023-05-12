@@ -1,10 +1,18 @@
 #pragma once
 
-#include "BattleFormation/IFormationSlot.h"
+#include "IFormationSlot.h"
+#include "IBattleFormation.h"
 
 #include <CryEntitySystem/IEntityComponent.h>
 #include <CrySchematyc/CoreAPI.h>
 
+struct SSlotSpawnParams
+{
+	IBattleFormation* pFormation = nullptr;
+	IFormationUnit* pUnit = nullptr;
+	Vec2 gridPosition;
+	Vec3 slotSize;
+};
 
 class CFormationSlot : public IEntityComponent, public IFormationSlot
 {
@@ -34,25 +42,24 @@ public:
 	// IFormationSlot
 	virtual IFormationUnit* GetUnit() const override { return m_pUnit; }
 	virtual Vec3 GetSize() const override { return m_boundingBox.GetSize(); }
-	virtual Vec3 GetPos() const override { return m_pEntity->GetPos(); }
+	virtual Vec3 GetPos() const override { return GetEntity()->GetPos(); }
+	virtual Vec2 GetGridPos() const override { return GetEntity()->GetPos(); }
 	virtual bool IsFormationReady() const override;
 	// ~IFormationSlot
 
 	// Set the world position of the slot
-	void SetPos(const Vec2& gridPos);
-
-	// Offset the position of the slot
-	void OffsetPos(const Vec2& movement);
-
-	// Update the position of the slot
-	void UpdatePos();
+	void SetPos(const Vec2& gridPosition);
 
 	// Set the size of the slot
 	void SetSize(const Vec3& size);
 
 	// Assign the unit occupying this slot
 	void AssignUnit(IFormationUnit* pUnit) { m_pUnit = pUnit; }
+
+	// Spawns a formation slot
+	static CFormationSlot* CreateSlot(const SSlotSpawnParams& slotParams);
 protected:
+	IBattleFormation* m_pFormation = nullptr;
 	IFormationUnit* m_pUnit = nullptr;
 	AABB m_boundingBox;
 };

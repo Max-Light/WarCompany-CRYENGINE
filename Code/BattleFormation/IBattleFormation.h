@@ -6,6 +6,7 @@
 #include "IFormationColumn.h"
 
 class CColumnIterator;
+struct SSlotSpawnParams;
 
 struct IBattleFormation : public IEntityComponent
 {
@@ -56,10 +57,10 @@ struct IBattleFormation : public IEntityComponent
 	virtual bool IsEmpty() const = 0;
 
 	// Inserts a new column in the formation containing the inserted unit
-	virtual IFormationSlot* InsertColumnAndUnit(uint col, SSlotSpawnParams& slotParams, EColumnShiftType shiftType) = 0;
+	virtual IFormationSlot* InsertColumnAndUnit(uint column, IFormationUnit* pUnit, EColumnShiftType shiftType) = 0;
 
 	// Inserts a unit within the specified column
-	virtual IFormationSlot* InsertUnitInColumn(uint col, uint depth, SSlotSpawnParams& slotParams) = 0;
+	virtual IFormationSlot* InsertUnitInColumn(uint column, uint depth, IFormationUnit* pUnit) = 0;
 
 	// Removes the slot at the specified index
 	virtual void RemoveSlot(uint x, uint y) = 0;
@@ -68,5 +69,5 @@ struct IBattleFormation : public IEntityComponent
 	virtual void RemoveSlot(IFormationSlot* pSlot) = 0;
 
 	// Translates a formation Vec2 grid position to a Vec3 local position
-	virtual Vec3 CreatePos(const Vec2& pos) = 0;
+	virtual Vec3 CreatePos(const Vec2& gridPos) = 0;
 };

@@ -63,16 +63,13 @@ public:
 	virtual Vec3 GetBattleLineDirection() const { return GetEntity()->GetRightDir() * GetBattleLineLength(); }
 	virtual float GetBattleLineLength() const override { return (*(--m_formationColumns.end()))->GetMaxXPos(); }
 	virtual bool IsEmpty() const { return m_formationColumns.empty(); }
-	virtual IFormationSlot* InsertColumnAndUnit(uint col, SSlotSpawnParams& slotParams, EColumnShiftType shiftType = EColumnShiftType::Right) override;
-	virtual IFormationSlot* InsertUnitInColumn(uint col, uint depth, SSlotSpawnParams& slotParams) override;
+	virtual IFormationSlot* InsertColumnAndUnit(uint column, IFormationUnit* pUnit, EColumnShiftType shiftType = EColumnShiftType::Right) override;
+	virtual IFormationSlot* InsertUnitInColumn(uint column, uint depth, IFormationUnit* pUnit) override;
 	virtual void RemoveSlot(uint x, uint y) override;
 	virtual void RemoveSlot(IFormationSlot* pSlot) override;
-	virtual Vec3 CreatePos(const Vec2& pos) override;
+	virtual Vec3 CreatePos(const Vec2& gridPos) override;
 	// ~IBattleFormation
 protected:
-	// Spawns a slot local to the formation
-	CFormationSlot* SpawnSlot(const SSlotSpawnParams& slotParams, const Vec2& gridPos);
-
 	// Inserts a new column in the formation
 	ColumnCollection::iterator InsertColumnAt(ColumnCollection::iterator colItr, float columnWidth, const EColumnShiftType& shiftType);
 

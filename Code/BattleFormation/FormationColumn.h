@@ -35,24 +35,19 @@ public:
 	void SetWidth(float width);
 
 	// Insert the slot into the formation column
-	void InsertSlot(SlotCollection::iterator& slotItr, CFormationSlot* slot);
+	void InsertSlot(uint depth, CFormationSlot* slot);
 
 	// Remove the slot from the formation column
 	CFormationSlot* RemoveSlot(const SlotCollection::iterator& slotItr);
 
-	// Return value of the QuerySlotPos function
-	struct SSlotPos
-	{
-		SlotCollection::iterator slotItr;
-		Vec2 gridPos;
-	};
-	SSlotPos QuerySlotPos(uint depth, const SSlotSpawnParams& slotParams) const;
-
-	// Shift Slots up and down the column by an offset
-	void ShiftSlotsAt(SlotCollection::iterator& slotItr, float offset);
+	// Return the relative position given the slot parameters
+	Vec2 QuerySlotGridPos(uint depth, const Vec3& slotSize) const;
 
 	// Iterate over all slots in the column
 	void IterateSlots(std::function<void(CFormationSlot&)> func) const;
+protected:
+	// Shift Slots up and down the column by an offset
+	void ShiftSlotsAt(SlotCollection::const_iterator& slotItr, float offset);
 protected:
 	SlotCollection m_slots;
 	float m_xPos = 0;

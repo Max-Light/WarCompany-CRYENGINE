@@ -48,23 +48,28 @@ bool CFormationSlot::IsFormationReady() const
 
 void CFormationSlot::SetPos(const Vec2& gridPos)
 {
-	float elevation = gEnv->p3DEngine->GetTerrainElevation(gridPos.x, gridPos.y);
-	Vec3 worldPos = Vec3(gridPos.x, gridPos.y, elevation);
-	m_pEntity->SetWorldTM(Matrix34::Create(m_pEntity->GetScale(), m_pEntity->GetRotation(), worldPos));
-}
-
-void CFormationSlot::OffsetPos(const Vec2& movement)
-{
-	SetPos(movement + m_pEntity->GetWorldPos());
-}
-
-void CFormationSlot::UpdatePos()
-{
-	SetPos(GetEntity()->GetWorldPos());
+	Vec3 pos = m_pFormation->CreatePos(gridPos);
+	GetEntity()->SetPos(pos);
 }
 
 void CFormationSlot::SetSize(const Vec3& size)
 {
 	Vec3 halfSize = size / 2;
 	m_boundingBox = AABB(Vec3(-halfSize.x, -halfSize.y, 0), Vec3(halfSize.x, halfSize.y, size.z));
+}
+
+CFormationSlot* CFormationSlot::CreateSlot(const SSlotSpawnParams& slotParams)
+{
+	SEntitySpawnParams spawnParams;
+	spawnParams.pClass = gEnv->pEntitySystem->GetClassRegistry()->GetDefaultClass();
+	spawnParams.sName = "Formation Slot";
+	spawnParams.pParent = slotParams.pFormation->GetEntity();
+	spawnParams.vPosition = slotParams.pFormation->CreatePos(slotParams.gridPosition);
+
+	IEntity* pEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
+	CFormationSlot* pSlot = pEntity->GetOrCreateComponent<CFormationSlot>();
+	pSlot->AssignUnit(slotParams.pUnit);
+	pSlot->SetSize(slotParams.slotSize);
+	pSlot->m_pFormation = slotParams.pFormation;
+	return pSlot;
 }

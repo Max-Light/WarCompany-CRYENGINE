@@ -19,11 +19,22 @@ public:
 	CVertexPoint() = default;
 	virtual ~CVertexPoint() override = default;
 
+	void Serialize(Serialization::IArchive& archive)
+	{
+		
+	}
+
 	static void ReflectType(Schematyc::CTypeDesc<CVertexPoint>& desc)
 	{
 		desc.SetGUID("{FF349F10-73BF-4653-965B-1C27F47CA957}"_cry_guid);
 		desc.SetLabel("Vertex Point");
 		desc.SetDescription("A vertex point attached to a battle line spline.");
+		desc.SetComponentFlags(EntityComponentFlags(
+			{
+				EEntityComponentFlags::HiddenFromUser,
+				EEntityComponentFlags::HideFromInspector
+			}
+		));
 	}
 
 	// IEntityComponent
@@ -32,16 +43,17 @@ public:
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	// ~IEntityComponent
 
-	// IVertexPoint
+	// ISplinePoint
 	virtual Vec3 GetPos() const override { return GetEntity()->GetPos(); }
+	virtual void SetPos(const Vec2& gridPosition) override;
+	// ~ISplinePoint
+
+	// IVertexPoint
 	virtual float GetBattleLineXPos() const override { return GetEntity()->GetPos().x; }
 	// ~IVertexPoint
-	
-	// Set the position of the the vertex
-	void SetPos(const Vec2& gridPosition);
 
 	// Spawns a vertex point
-	static CVertexPoint* SpawnVertex(SVertexSpawnParams& vertexParams);
+	static CVertexPoint* CreateVertex(SVertexSpawnParams& vertexParams);
 private:
 	IBattleLineSpline* m_pSpline = nullptr;
 };

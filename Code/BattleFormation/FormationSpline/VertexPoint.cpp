@@ -46,7 +46,7 @@ void CVertexPoint::SetPos(const Vec2& gridPosition)
 	GetEntity()->SetPos(pos);
 }
 
-CVertexPoint* CVertexPoint::SpawnVertex(SVertexSpawnParams& vertexParams)
+CVertexPoint* CVertexPoint::CreateVertex(SVertexSpawnParams& vertexParams)
 {
 	CRY_ASSERT(vertexParams.pSpline != nullptr, "Vertex point must have a reference to a battle line spline!");
 

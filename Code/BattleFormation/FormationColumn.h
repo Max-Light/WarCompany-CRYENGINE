@@ -9,7 +9,7 @@ public:
 	typedef std::vector<CFormationSlot*> SlotCollection;
 public:
 	CFormationColumn() = default;
-	virtual ~CFormationColumn() = default;
+	virtual ~CFormationColumn() override = default;
 
 	CFormationSlot* operator[](uint i) const { return m_slots[i]; }
 
@@ -17,6 +17,7 @@ public:
 	virtual float GetXPos() const override { return m_xPos; }
 	virtual float GetWidth() const override { return m_width; }
 	virtual float GetYPos() const override { return 0; }
+	virtual void SetColumnVerticalOffset(const IColumnVerticalOffsetEffect& verticalEffect) override;
 	// ~IFormationColumn
 
 	// Return the beginning iterator

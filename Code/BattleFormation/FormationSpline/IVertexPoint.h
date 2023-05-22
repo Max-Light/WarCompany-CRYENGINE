@@ -1,14 +1,11 @@
 #pragma once
 
-#include "BattleFormation/IFormationColumn.h"
+#include "ISplinePoint.h"
 
-struct IVertexPoint 
+struct IVertexPoint : public ISplinePoint
 {
 	IVertexPoint() = default;
 	virtual ~IVertexPoint() = default;
-
-	// Return the position of the vertex
-	virtual Vec3 GetPos() const = 0;
 
 	// Return the battle line x position local to the battle formation
 	virtual float GetBattleLineXPos() const = 0;

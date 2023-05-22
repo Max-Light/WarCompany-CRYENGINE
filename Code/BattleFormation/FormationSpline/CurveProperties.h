@@ -1,17 +1,18 @@
 #pragma once
 
-#include "ICurveLine.h"
+#include "ICurveProperties.h"
+#include "AnchorPoint.h"
 
-class CCurveLine : public ICurveLine
+class CCurveProperties : public ICurveProperties
 {
 public:
-	CCurveLine(CAnchorPoint* pOutAnchor, CAnchorPoint* pInAnchor, const ECurveMode& curveMode = ECurveMode::Linear)
+	CCurveProperties(CAnchorPoint* pOutAnchor, CAnchorPoint* pInAnchor, const ECurveMode& curveMode = ECurveMode::Linear)
 		: m_outAnchor(pOutAnchor)
 		, m_inAnchor(pInAnchor)
 		, m_curveMode(curveMode)
 	{
 	}
-	virtual ~CCurveLine() = default;
+	virtual ~CCurveProperties() = default;
 
 	// ICurveLine
 	virtual ECurveMode GetCurveMode() const override { return m_curveMode; }

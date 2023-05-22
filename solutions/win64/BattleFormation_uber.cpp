@@ -11,4 +11,5 @@
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/VertexPoint.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/CurveLine.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/BattleLineSpline.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/DebugBattleLineSpline.cpp>
 

@@ -1,5 +1,5 @@
 <ObjectLayer>
- <Layer Name="Main" FullName="Main" GUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1683246439">
+ <Layer Name="Main" FullName="Main" GUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1684264292">
   <LayerObjects>
    <Object Type="EmptyEntity" Layer="Main" LayerGUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Id="d24868a3-6ec7-3123-c67f-1f5cee5cc3a8" Name="Company Unit-1" Pos="510.93881,518.45239,32" Rotate="1,0,0,0" Scale="1,1,1" ColorRGB="65535" UseCustomLevelLayerColor="0" MinSpec="0" MatLayersMask="0" OutdoorOnly="0" CastShadow="1" CastShadowMinspec="1" DynamicDistanceShadows="0" GIMode="0" LodRatio="100" ViewDistRatio="100" HiddenInGame="0" RecvWind="0" RenderNearest="0" NoStaticDecals="0" EntityClass="Entity" HasEntity="1">
     <Properties />
@@ -57,6 +57,17 @@
      </Component>
      <Component CryXmlVersion="2" TypeGUID="183e3c84-2e08-4506-95fa-b362f7e735e9" TypeName="Cry::DefaultComponents::CInputComponent" GUID="9096f142-eb29-01b7-b690-1e1c9046c459" Name="" UserAdded="false">
       <properties />
+     </Component>
+     <Component CryXmlVersion="2" TypeGUID="4c3056ee-572f-4394-9599-7543e9e083a4" TypeName="CDebugBattleLineSpline" GUID="e3be9d89-ce75-5da5-b278-25f40c71b930" Name="" UserAdded="true">
+      <properties>
+       <Curve_Points>
+        <element>
+         <In_Anchor_Position x="0" y="0"/>
+         <Vertex_Position x="1" y="0"/>
+         <Out_Anchor_Position x="2" y="0"/>
+        </element>
+       </Curve_Points>
+      </properties>
      </Component>
     </Components>
    </Object>

@@ -43,6 +43,12 @@ public:
 		desc.SetLabel("Battle Formation");
 		desc.SetDescription("Create an organized unit formation.");
 		desc.AddBase<IBattleFormation>();
+		EntityComponentFlags componentFlags;
+		desc.SetComponentFlags(EntityComponentFlags(
+			{
+				EEntityComponentFlags::Singleton
+			}
+		));
 	}
 
 	// IEntityComponent

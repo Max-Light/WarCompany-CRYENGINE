@@ -11,10 +11,10 @@ enum class ECurveMode : uint8
 	Cubic = 2
 };
 
-struct ICurveLine
+struct ICurveProperties
 {
-	ICurveLine() = default;
-	virtual ~ICurveLine() = default;
+	ICurveProperties() = default;
+	virtual ~ICurveProperties() = default;
 
 	// Return the curve mode of the line
 	virtual ECurveMode GetCurveMode() const = 0;

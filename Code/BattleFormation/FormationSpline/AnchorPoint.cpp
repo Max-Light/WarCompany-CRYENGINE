@@ -45,7 +45,7 @@ void CAnchorPoint::SetPos(const Vec2& gridPosition)
     GetEntity()->SetPos(pos);
 }
 
-CAnchorPoint* CAnchorPoint::SpawnAnchor(const SAnchorSpawnParams& anchorParams)
+CAnchorPoint* CAnchorPoint::CreateAnchor(const SAnchorSpawnParams& anchorParams)
 {
     CRY_ASSERT(anchorParams.pSpline != nullptr, "Anchor Point must have a refernece to a battle line spline!");
 
@@ -53,6 +53,7 @@ CAnchorPoint* CAnchorPoint::SpawnAnchor(const SAnchorSpawnParams& anchorParams)
     spawnParams.vPosition = anchorParams.pSpline->GetFormation()->CreatePos(anchorParams.gridPosition);
     spawnParams.sName = "Anchor Point";
     spawnParams.pParent = anchorParams.pSpline->GetEntity();
+    spawnParams.pClass = gEnv->pEntitySystem->GetClassRegistry()->GetDefaultClass();
 
     IEntity* pEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
     CAnchorPoint* pAnchor = pEntity->GetOrCreateComponent<CAnchorPoint>();

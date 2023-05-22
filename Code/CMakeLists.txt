@@ -68,6 +68,8 @@ add_sources("BattleFormation_uber.cpp"
 		"BattleFormation/FormationSpline/BattleLineSpline.cpp"
 		"BattleFormation/FormationSpline/BattleLineSpline.h"
 		"BattleFormation/FormationSpline/IBattleLineSpline.h"
+		"BattleFormation/FormationSpline/DebugBattleLineSpline.cpp"
+		"BattleFormation/FormationSpline/DebugBattleLineSpline.h"
 )
 
 add_sources("Components_uber.cpp"

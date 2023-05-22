@@ -1,9 +1,11 @@
 #pragma once
 
+#include "StdAfx.h"
 #include "IAnchorPoint.h"
 #include "IBattleLineSpline.h"
 
 #include <CryEntitySystem/IEntityComponent.h>
+#include <DefaultComponents/Physics/SpherePrimitiveComponent.h>
 
 
 struct SAnchorSpawnParams
@@ -26,6 +28,12 @@ public:
 		desc.SetGUID("{89BE39F7-6E69-4B05-8C8B-E61BDB0F01D8}"_cry_guid);
 		desc.SetLabel("Anchor Point");
 		desc.SetDescription("A anchor point attached to a battle line spline.");
+		desc.SetComponentFlags(EntityComponentFlags(
+			{
+				EEntityComponentFlags::HiddenFromUser,
+				EEntityComponentFlags::HideFromInspector
+			}
+		));
 	}
 
 	// IEntityComponent
@@ -34,15 +42,14 @@ public:
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	// ~IEntityComponent
 
-	// IAnchorPoint
-	Vec3 GetPos() const { return GetEntity()->GetPos(); }
-	// ~IAnchorPoint
-
-	// Set the position of the anchor
-	void SetPos(const Vec2& gridPosition);
+	// ISplinePoint
+	virtual Vec3 GetPos() const override { return GetEntity()->GetPos(); }
+	virtual void SetPos(const Vec2& gridPosition) override;
+	// ~ISplinePoint
 
 	// Spawns an anchor point
-	static CAnchorPoint* SpawnAnchor(const SAnchorSpawnParams& anchorParams);
+	static CAnchorPoint* CreateAnchor(const SAnchorSpawnParams& anchorParams);
 private:
 	IBattleLineSpline* m_pSpline = nullptr;
+	Cry::DefaultComponents::CSpherePrimitiveComponent* m_pSphereCollider = nullptr;
 };

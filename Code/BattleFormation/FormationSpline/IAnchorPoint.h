@@ -1,11 +1,9 @@
 #pragma once
 
+#include "ISplinePoint.h"
 
-struct IAnchorPoint
+struct IAnchorPoint : public ISplinePoint
 {
 	IAnchorPoint() = default;
 	virtual ~IAnchorPoint() = default;
-
-	// Return the position of the anchor point
-	virtual Vec3 GetPos() const = 0;
 };

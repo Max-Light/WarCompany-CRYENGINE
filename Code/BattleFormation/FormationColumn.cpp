@@ -1,6 +1,11 @@
 
 #include "FormationColumn.h"
 
+void CFormationColumn::SetColumnVerticalOffset(const IColumnVerticalOffsetEffect& verticalEffect)
+{
+
+}
+
 void CFormationColumn::SetXPos(float xPos)
 {
     float diff = xPos - m_xPos;

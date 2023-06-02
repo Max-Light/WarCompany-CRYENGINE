@@ -47,6 +47,7 @@ void CDebugBattleLineSpline::ProcessEvent(const SEntityEvent& event)
     switch (event.event)
     {
     case Cry::Entity::EEvent::EditorPropertyChanged:
+        //CDebugBattleLineSpline::GetClassDesc().FindMemberById(event.nParam[1]);
         UpdateSpline();
         break;
     case Cry::Entity::EEvent::Update:

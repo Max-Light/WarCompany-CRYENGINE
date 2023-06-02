@@ -5,6 +5,7 @@
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSlot.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationColumn.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/BattleFormation.cpp>
+#include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/DebugBattleFormation.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationBuilder/FormationBuilder.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationBuilder/FormationBuildGroup.cpp>
 #include <C:/Users/Maxwell/Documents/CRYENGINE Projects/WarCompany/Code/BattleFormation/FormationSpline/AnchorPoint.cpp>

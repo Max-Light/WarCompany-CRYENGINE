@@ -40,6 +40,7 @@ public:
 	// ~IEntityComponent
 
 	// IFormationUnit
+	virtual EntityId GetId() const override { return GetEntityId(); }
 	virtual Vec3 GetWorldPos() const override { return m_pEntity->GetWorldPos(); }
 	virtual Vec3 GetSize() const override;
 	virtual AABB GetAABB() const override;

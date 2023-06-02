@@ -3,16 +3,16 @@
 #include "ICurveProperties.h"
 #include "AnchorPoint.h"
 
-class CCurveProperties : public ICurveProperties
+class CCurveLine : public ICurveProperties
 {
 public:
-	CCurveProperties(CAnchorPoint* pOutAnchor, CAnchorPoint* pInAnchor, const ECurveMode& curveMode = ECurveMode::Linear)
+	CCurveLine(CAnchorPoint* pOutAnchor, CAnchorPoint* pInAnchor, const ECurveMode& curveMode = ECurveMode::Linear)
 		: m_outAnchor(pOutAnchor)
 		, m_inAnchor(pInAnchor)
 		, m_curveMode(curveMode)
 	{
 	}
-	virtual ~CCurveProperties() = default;
+	virtual ~CCurveLine() = default;
 
 	// ICurveLine
 	virtual ECurveMode GetCurveMode() const override { return m_curveMode; }

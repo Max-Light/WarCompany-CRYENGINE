@@ -1,9 +1,12 @@
 <ObjectLayer>
- <Layer Name="Main" FullName="Main" GUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1684264292">
+ <Layer Name="Main" FullName="Main" GUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1685680340">
   <LayerObjects>
    <Object Type="EmptyEntity" Layer="Main" LayerGUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Id="d24868a3-6ec7-3123-c67f-1f5cee5cc3a8" Name="Company Unit-1" Pos="510.93881,518.45239,32" Rotate="1,0,0,0" Scale="1,1,1" ColorRGB="65535" UseCustomLevelLayerColor="0" MinSpec="0" MatLayersMask="0" OutdoorOnly="0" CastShadow="1" CastShadowMinspec="1" DynamicDistanceShadows="0" GIMode="0" LodRatio="100" ViewDistRatio="100" HiddenInGame="0" RecvWind="0" RenderNearest="0" NoStaticDecals="0" EntityClass="Entity" HasEntity="1">
     <Properties />
     <Components>
+     <Component CryXmlVersion="2" TypeGUID="26a8ddb5-7cef-4984-82a0-2e1fd5afd407" TypeName="CCompanyUnit" GUID="535e3be8-fa5a-6bb3-ab81-f54a9a588396" Name="" UserAdded="true">
+      <properties />
+     </Component>
      <Component CryXmlVersion="2" TypeGUID="1b988fa3-2cc8-4dfa-9107-a63aded77e91" TypeName="CEntityAINavigationComponent" GUID="98380f3f-48f7-91ce-20b9-a98be7c5ba6d" Name="" UserAdded="true">
       <properties agent="TroopCompany" updateTransf="false">
        <IEntityNavigationComponent />
@@ -48,25 +51,36 @@
     <Properties />
     <Components>
      <Component CryXmlVersion="2" TypeGUID="4354c586-96b8-4d5f-8410-b1e845995bf0" TypeName="CBattleFormation" GUID="2fb3cd7a-705a-e371-fc52-e8231d6886b7" Name="" UserAdded="true">
-      <properties>
-       <IBattleFormation />
-      </properties>
-     </Component>
-     <Component CryXmlVersion="2" TypeGUID="e1621d2e-aaaa-4d42-a112-e745c3cd46c7" TypeName="CBattleLineSpline" GUID="ed8a113d-ada8-de8f-9c0c-251b5ffad5f2" Name="" UserAdded="true">
       <properties />
      </Component>
-     <Component CryXmlVersion="2" TypeGUID="183e3c84-2e08-4506-95fa-b362f7e735e9" TypeName="Cry::DefaultComponents::CInputComponent" GUID="9096f142-eb29-01b7-b690-1e1c9046c459" Name="" UserAdded="false">
-      <properties />
-     </Component>
-     <Component CryXmlVersion="2" TypeGUID="4c3056ee-572f-4394-9599-7543e9e083a4" TypeName="CDebugBattleLineSpline" GUID="e3be9d89-ce75-5da5-b278-25f40c71b930" Name="" UserAdded="true">
+     <Component CryXmlVersion="2" TypeGUID="992793a8-acdd-4e9a-ba9c-b654da6057e4" TypeName="CDebugBattleFormation" GUID="113ee880-6e30-6b9c-a3af-1d4bf5cc0197" Name="" UserAdded="true">
       <properties>
-       <Curve_Points>
-        <element>
-         <In_Anchor_Position x="0" y="0"/>
-         <Vertex_Position x="1" y="0"/>
-         <Out_Anchor_Position x="2" y="0"/>
-        </element>
-       </Curve_Points>
+       <Formation>
+        <Columns>
+         <element>
+          <Slots>
+           <element UnitEntity="0"/>
+          </Slots>
+         </element>
+         <element>
+          <Slots>
+           <element UnitEntity="0"/>
+           <element UnitEntity="0"/>
+          </Slots>
+         </element>
+         <element>
+          <Slots>
+           <element UnitEntity="0"/>
+           <element UnitEntity="0"/>
+          </Slots>
+         </element>
+         <element>
+          <Slots>
+           <element UnitEntity="0"/>
+          </Slots>
+         </element>
+        </Columns>
+       </Formation>
       </properties>
      </Component>
     </Components>

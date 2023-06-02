@@ -73,6 +73,12 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IBattleFormation.h">
       <Filter>Battle Formation</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\DebugBattleFormation.cpp">
+      <Filter>Battle Formation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\DebugBattleFormation.h">
+      <Filter>Battle Formation</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationBuilder\FormationBuilder.h">
       <Filter>Battle Formation\Formation Builder</Filter>
     </ClInclude>
@@ -106,10 +112,10 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\CurveLine.cpp">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\BattleFormation\FormationSpline\CurveProperties.h">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\CurveLine.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\BattleFormation\FormationSpline\ICurveProperties.h">
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\ICurveProperties.h">
       <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSpline\BattleLineSpline.cpp">
@@ -138,9 +144,6 @@
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\Components\StdComponent.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Code\BattleFormation\FormationSpline\ISplinePoint.h">
-      <Filter>Battle Formation\Formation Spline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

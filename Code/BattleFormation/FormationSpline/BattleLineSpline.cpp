@@ -122,7 +122,7 @@ void CBattleLineSpline::InsertCurve(float battleLineXPos)
     anchorParams.gridPosition = newInAnchorMagnitude * -vertexTangent + pNewVertex->GetPos();
     CAnchorPoint* pNewInAnchor = CAnchorPoint::CreateAnchor(anchorParams);
 
-    CCurveProperties* pNewCurveLine = new CCurveProperties(pNewOutAnchor, (*curveItr.GetCurveLineItr())->GetInAnchor(), pCurveLine->GetCurveMode());
+    CCurveLine* pNewCurveLine = new CCurveLine(pNewOutAnchor, (*curveItr.GetCurveLineItr())->GetInAnchor(), pCurveLine->GetCurveMode());
     (*curveItr.GetCurveLineItr())->SetInAnchor(pNewInAnchor);
 
     m_vertexPoints.insert(curveItr.GetVertexItr() + 1, pNewVertex);
@@ -153,7 +153,7 @@ void CBattleLineSpline::Reset()
     }
     m_curveSegments.erase(startCurveLineItr, endCurveLineItr);
 
-    CCurveProperties* pCurveLine = *m_curveSegments.begin();
+    CCurveLine* pCurveLine = *m_curveSegments.begin();
     CVertexPoint* pStartVertex = *m_vertexPoints.begin();
     CVertexPoint* pEndVertex = *m_vertexPoints.end() - 1;
     Vec2 anchorGridDisplacement = (pEndVertex->GetPos() - pStartVertex->GetPos()) * s_normalizedAnchorLength;
@@ -281,7 +281,7 @@ void CBattleLineSpline::InitializeSpline()
     anchorParams.gridPosition = pEndVertex->GetPos() + -anchorDifference;
     CAnchorPoint* pInAnchor = CAnchorPoint::CreateAnchor(anchorParams);
 
-    CCurveProperties* pCurveLine = new CCurveProperties(pOutAnchor, pInAnchor);
+    CCurveLine* pCurveLine = new CCurveLine(pOutAnchor, pInAnchor);
     m_curveSegments.push_back(pCurveLine);
 }
 

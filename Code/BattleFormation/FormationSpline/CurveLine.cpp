@@ -1,5 +1,5 @@
-#include "CurveProperties.h"
+#include "CurveLine.h"
 
-void CCurveProperties::ApplyCurveMode(const ECurveMode& mode)
+void CCurveLine::ApplyCurveMode(const ECurveMode& mode)
 {
 }

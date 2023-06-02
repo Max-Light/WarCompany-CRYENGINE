@@ -14,7 +14,6 @@ namespace
 			Schematyc::CEnvRegistrationScope componentScope = scope.Register(SCHEMATYC_MAKE_ENV_COMPONENT(CFormationSlot));
 		}
 	}
-
 	CRY_STATIC_AUTO_REGISTER_FUNCTION(&RegisterFormationSlotComponent);
 }
 
@@ -34,8 +33,10 @@ void CFormationSlot::ProcessEvent(const SEntityEvent& event)
 	{
 	case Cry::Entity::EEvent::Update:
 	{
+		Vec3 halfSize = m_slotSize / 2;
+		AABB box = AABB(Vec3(-halfSize.x, -halfSize.y, 0), Vec3(halfSize.x, halfSize.y, m_slotSize.z));
 		gEnv->pAuxGeomRenderer->SetRenderFlags(SAuxGeomRenderFlags());
-		gEnv->pAuxGeomRenderer->DrawAABB(m_boundingBox, m_pEntity->GetWorldTM(), true, ColorB(0, 255, 255), EBoundingBoxDrawStyle::eBBD_Faceted);
+		gEnv->pAuxGeomRenderer->DrawAABB(box, m_pEntity->GetWorldTM(), true, ColorB(0, 255, 255), EBoundingBoxDrawStyle::eBBD_Faceted);
 	}
 	break;
 	}
@@ -54,8 +55,7 @@ void CFormationSlot::SetPos(const Vec2& gridPos)
 
 void CFormationSlot::SetSize(const Vec3& size)
 {
-	Vec3 halfSize = size / 2;
-	m_boundingBox = AABB(Vec3(-halfSize.x, -halfSize.y, 0), Vec3(halfSize.x, halfSize.y, size.z));
+	m_slotSize = size;
 }
 
 CFormationSlot* CFormationSlot::CreateSlot(const SSlotSpawnParams& slotParams)
@@ -72,4 +72,12 @@ CFormationSlot* CFormationSlot::CreateSlot(const SSlotSpawnParams& slotParams)
 	pSlot->SetSize(slotParams.slotSize);
 	pSlot->m_pFormation = slotParams.pFormation;
 	return pSlot;
+}
+
+CFormationSlot::SSlotProperties CFormationSlot::GetSlotProperties() const
+{
+	SSlotProperties slotProperties;
+	slotProperties.unitId = 0;
+	slotProperties.gridPos = GetGridPos();
+	return slotProperties;
 }

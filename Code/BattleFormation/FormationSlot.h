@@ -17,6 +17,18 @@ struct SSlotSpawnParams
 class CFormationSlot : public IEntityComponent, public IFormationSlot
 {
 public:
+	struct SSlotProperties
+	{
+		void Serialize(Serialization::IArchive& archive)
+		{
+			archive(unitId, "UnitEntity", "Unit Entity");
+			//archive(gridPos, "GridPosition", "Grid Position");
+		}
+
+		EntityId unitId = 0;
+		Vec2 gridPos;
+	};
+public:
 	CFormationSlot() = default;
 	virtual ~CFormationSlot() override = default;
 
@@ -41,7 +53,7 @@ public:
 
 	// IFormationSlot
 	virtual IFormationUnit* GetUnit() const override { return m_pUnit; }
-	virtual Vec3 GetSize() const override { return m_boundingBox.GetSize(); }
+	virtual Vec3 GetSize() const override { return m_slotSize; }
 	virtual Vec3 GetPos() const override { return GetEntity()->GetPos(); }
 	virtual Vec2 GetGridPos() const override { return GetEntity()->GetPos(); }
 	virtual bool IsFormationReady() const override;
@@ -58,9 +70,15 @@ public:
 
 	// Spawns a formation slot
 	static CFormationSlot* CreateSlot(const SSlotSpawnParams& slotParams);
+
+	// Destroy this slot instance
+	inline void Destroy() { gEnv->pEntitySystem->RemoveEntity(GetEntityId()); }
+
+	// Return the slot properties
+	SSlotProperties GetSlotProperties() const;
 protected:
 	IBattleFormation* m_pFormation = nullptr;
 	IFormationUnit* m_pUnit = nullptr;
-	AABB m_boundingBox;
+	Vec3 m_slotSize;
 };
 

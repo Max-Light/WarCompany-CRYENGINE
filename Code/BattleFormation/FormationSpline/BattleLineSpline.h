@@ -4,14 +4,14 @@
 #include "BattleFormation/BattleFormation.h"
 #include "VertexPoint.h"
 #include "AnchorPoint.h"
-#include "CurveProperties.h"
+#include "CurveLine.h"
 
 // For reference
 #include <DefaultComponents/Physics/Vehicles/VehicleComponent.h>
 
 
 typedef std::vector<CVertexPoint*> VertexCollection;
-typedef std::vector<CCurveProperties*> CurveLineCollection;
+typedef std::vector<CCurveLine*> CurveLineCollection;
 
 class CLocalCurveIterator : public ICurveSection
 {

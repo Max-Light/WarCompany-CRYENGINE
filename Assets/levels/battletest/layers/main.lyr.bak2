@@ -1,5 +1,5 @@
 <ObjectLayer>
- <Layer Name="Main" FullName="Main" GUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1685677135">
+ <Layer Name="Main" FullName="Main" GUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1685680296">
   <LayerObjects>
    <Object Type="EmptyEntity" Layer="Main" LayerGUID="338a1974-0fdd-c3a1-5da8-3b4ba091e99c" Id="d24868a3-6ec7-3123-c67f-1f5cee5cc3a8" Name="Company Unit-1" Pos="510.93881,518.45239,32" Rotate="1,0,0,0" Scale="1,1,1" ColorRGB="65535" UseCustomLevelLayerColor="0" MinSpec="0" MatLayersMask="0" OutdoorOnly="0" CastShadow="1" CastShadowMinspec="1" DynamicDistanceShadows="0" GIMode="0" LodRatio="100" ViewDistRatio="100" HiddenInGame="0" RecvWind="0" RenderNearest="0" NoStaticDecals="0" EntityClass="Entity" HasEntity="1">
     <Properties />
@@ -71,6 +71,12 @@
          <element>
           <Slots>
            <element UnitEntity="0"/>
+           <element UnitEntity="0"/>
+           <element UnitEntity="0"/>
+          </Slots>
+         </element>
+         <element>
+          <Slots>
            <element UnitEntity="0"/>
           </Slots>
          </element>

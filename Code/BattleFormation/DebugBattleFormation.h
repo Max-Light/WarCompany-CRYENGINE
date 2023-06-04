@@ -101,12 +101,8 @@ public:
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 	// ~IEntityComponent
 private:
-	void UpdateFormation();
-	inline void InsertNewColumnAndUnit(uint columnIndex);
-	inline void InsertNewUnitInColumn(uint columnIndex, uint slotIndex);
-	inline void RemoveColumn(uint columnIndex);
-	inline void RemoveSlotInColumn(uint columnIndex, uint slotIndex);
+	void UpdateFormationParams();
 private:
-	IBattleFormation* m_formation = nullptr;
+	IBattleFormation* m_pFormation = nullptr;
 	SFormationParams m_formationParams;
 };

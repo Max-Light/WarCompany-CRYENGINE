@@ -75,7 +75,7 @@ IFormationSlot* CBattleFormation::InsertColumnAndUnit(uint columnIndex, IFormati
 {
 	CRY_ASSERT(columnIndex <= GetColumnCount(), "Column is outside of formation insertion range!");
 	Vec3 slotSize = Vec3(5, 3, 2);
-	ColumnCollection::iterator colItr = m_formationColumns.begin() + columnIndex;
+	ColumnItr colItr = m_formationColumns.begin() + columnIndex;
 	colItr = InsertColumnAt(colItr, slotSize.x, shiftType);
 	CFormationColumn* pColumn = *colItr;
 	Vec2 slotGridPos = pColumn->QuerySlotGridPos(0, slotSize);
@@ -126,120 +126,54 @@ IFormationSlot* CBattleFormation::InsertUnitInColumn(uint columnIndex, uint dept
 	return pSlot;
 }
 
-void CBattleFormation::RemoveColumn(uint columnIndex)
+void CBattleFormation::RemoveColumn(uint columnIndex, EColumnShiftType shiftType)
 {
-	ColumnItr colItr = m_formationColumns.begin() + columnIndex;
-	CRY_ASSERT(colItr != m_formationColumns.end(), "Column not found in formation!");
-	if (colItr == m_formationColumns.end())
+	ColumnItr columnItr = m_formationColumns.begin() + columnIndex;
+	CRY_ASSERT(columnItr != m_formationColumns.end(), "Column not found in formation!");
+	if (columnItr == m_formationColumns.end())
 	{
+		CryWarning(EValidatorModule::VALIDATOR_MODULE_ENTITYSYSTEM, EValidatorSeverity::VALIDATOR_ERROR, "Column Index is out of formation range!");
 		return;
 	}
-	CFormationColumn* pColumnToRemove = *colItr;
-
-	SBattleFormationEvent formationEvent = SBattleFormationEvent(
-		FormationSystem::EFormationEvent::REMOVE_COLUMN,
-		reinterpret_cast<intptr_t>(pColumnToRemove),
-		0
-	);
-	NotifyBattleFormationListeners(formationEvent);
-
-	pColumnToRemove->Clear();
-	delete pColumnToRemove;
-	m_formationColumns.erase(colItr);
+	RemoveColumn(columnItr, shiftType);
 }
 
-bool CBattleFormation::RemoveColumn(IFormationColumn* pColumn)
+bool CBattleFormation::RemoveColumn(IFormationColumn* pColumn, EColumnShiftType shiftType)
 {
-	ColumnItr colItr = std::find(m_formationColumns.begin(), m_formationColumns.end(), pColumn);
-	CRY_ASSERT(colItr != m_formationColumns.end(), "Column not found in formation!");
-	if (colItr == m_formationColumns.end())
+	ColumnItr columnItr = std::find(m_formationColumns.begin(), m_formationColumns.end(), pColumn);
+	CRY_ASSERT(columnItr != m_formationColumns.end(), "Column not found in formation!");
+	if (columnItr == m_formationColumns.end())
 	{
 		return false;
 	}
-	CFormationColumn* pColumnToRemove = *colItr;
-
-	SBattleFormationEvent formationEvent = SBattleFormationEvent(
-		FormationSystem::EFormationEvent::REMOVE_COLUMN,
-		reinterpret_cast<intptr_t>(pColumnToRemove),
-		0
-	);
-	NotifyBattleFormationListeners(formationEvent);
-
-	pColumnToRemove->Clear();
-	delete pColumnToRemove;
-	m_formationColumns.erase(colItr);
+	RemoveColumn(columnItr, shiftType);
 	return true;
 }
 
-void CBattleFormation::RemoveSlot(uint columnIndex, uint index)
+void CBattleFormation::RemoveSlot(uint columnIndex, uint slotIndex)
 {
-	CRY_ASSERT(columnIndex < GetColumnCount(), "Column index out of range!");
-	CFormationColumn* pColumn = m_formationColumns[columnIndex];
-	CRY_ASSERT(index < pColumn->GetSlotCount(), "Slot index out of range in Column!");
-	CFormationSlot* pSlotToRemove = pColumn->GetSlotAt(index);
-	if (!pSlotToRemove)
-	{
-		CryWarning(EValidatorModule::VALIDATOR_MODULE_ENTITYSYSTEM, EValidatorSeverity::VALIDATOR_ERROR, "Formation Slot does not exist in the formation!");
-		return;
-	}
-
-	SBattleFormationEvent formationEvent = SBattleFormationEvent(
-		FormationSystem::EFormationEvent::ADD_SLOT,
-		reinterpret_cast<intptr_t>(pColumn),
-		reinterpret_cast<intptr_t>(pSlotToRemove)
-	);
-	if (pColumn->GetSlotCount() == 1)
-	{
-		formationEvent.event |= FormationSystem::EFormationEvent::REMOVE_COLUMN;
-	}
-	NotifyBattleFormationListeners(formationEvent);
-
-	pColumn->RemoveSlot(index);
-	pSlotToRemove->Destroy();
-	if (pColumn->IsEmpty())
-	{
-		m_formationColumns.erase(m_formationColumns.begin() + columnIndex);
-		delete pColumn;
-	}
+	FormationItr formationItr = GetFormationItr(columnIndex, slotIndex);
+	RemoveSlot(formationItr);
 }
 
 bool CBattleFormation::RemoveSlot(IFormationSlot* pSlot)
 {
-	uint columnIndex = 0;
-	for (CFormationColumn* pColumn : m_formationColumns)
+	FormationItr formationItr = GetBeginFormationItr();
+	while (formationItr.GetColumnItr() != m_formationColumns.end())
 	{
-		++columnIndex;
-		if (pColumn->IsRanging(pSlot->GetGridPos().x))
+		if (formationItr.GetColumn()->IsRanging(pSlot->GetGridPos().x))
 		{
-			CFormationColumn::SlotItr slotItr = pColumn->FindSlot(pSlot);
-			CFormationSlot* pSlotToRemove = *slotItr;
-			CRY_ASSERT(pSlotToRemove, "Slot not found in column!");
-			if (!pSlotToRemove)
+			if (formationItr.GoToSlot(pSlot))
 			{
-				CryWarning(EValidatorModule::VALIDATOR_MODULE_ENTITYSYSTEM, EValidatorSeverity::VALIDATOR_ERROR, "Formation Slot does not exist in the formation!");
+				RemoveSlot(formationItr);
+				return true;
+			}
+			else
+			{
 				return false;
 			}
-
-			SBattleFormationEvent formationEvent = SBattleFormationEvent(
-				FormationSystem::EFormationEvent::ADD_SLOT,
-				reinterpret_cast<intptr_t>(pColumn),
-				reinterpret_cast<intptr_t>(pSlotToRemove)
-			);
-			if (pColumn->GetSlotCount() == 1)
-			{
-				formationEvent.event |= FormationSystem::EFormationEvent::REMOVE_COLUMN;
-			}
-			NotifyBattleFormationListeners(formationEvent);
-
-			bool result = pColumn->RemoveSlot(slotItr);
-			pSlotToRemove->Destroy();
-			if (pColumn->IsEmpty())
-			{
-				m_formationColumns.erase(m_formationColumns.begin() + columnIndex);
-				delete pColumn;
-			}
-			return result;
 		}
+		formationItr.NextColumn();
 	}
 	return false;
 }
@@ -263,6 +197,41 @@ Vec3 CBattleFormation::CreatePos(const Vec2& pos)
 	return newPos;
 }
 
+void CBattleFormation::RemoveColumn(ColumnItr& columnItr, EColumnShiftType shiftType)
+{
+	CFormationColumn* pColumnToRemove = *columnItr;
+
+	SBattleFormationEvent formationEvent = SBattleFormationEvent(
+		FormationSystem::EFormationEvent::REMOVE_COLUMN,
+		reinterpret_cast<intptr_t>(pColumnToRemove),
+		0
+	);
+	NotifyBattleFormationListeners(formationEvent);
+
+	float columnWidth = pColumnToRemove->GetWidth();
+	pColumnToRemove->Clear();
+	delete pColumnToRemove;
+	columnItr = m_formationColumns.erase(columnItr);
+
+	ShiftColumnsAt(columnItr, -columnWidth, shiftType);
+}
+
+void CBattleFormation::RemoveSlot(const FormationItr& formationItr)
+{
+	CFormationColumn* pColumn = formationItr.GetColumn();
+	CFormationSlot* pSlotToRemove = formationItr.GetSlot();
+
+	SBattleFormationEvent formationEvent = SBattleFormationEvent(
+		FormationSystem::EFormationEvent::REMOVE_SLOT,
+		reinterpret_cast<intptr_t>(pColumn),
+		reinterpret_cast<intptr_t>(pSlotToRemove)
+	);
+	NotifyBattleFormationListeners(formationEvent);
+
+	pColumn->RemoveSlot(formationItr.GetSlotItr());
+	pSlotToRemove->Destroy();
+}
+
 CBattleFormation::SFormationProperties CBattleFormation::GetFormationProperties() const
 {
 	SFormationProperties formationProperties;
@@ -274,7 +243,7 @@ CBattleFormation::SFormationProperties CBattleFormation::GetFormationProperties(
 	return formationProperties;
 }
 
-ColumnCollection::iterator CBattleFormation::InsertColumnAt(ColumnItr colItr, float columnWidth, const EColumnShiftType& shiftType)
+CBattleFormation::ColumnItr CBattleFormation::InsertColumnAt(ColumnItr colItr, float columnWidth, const EColumnShiftType& shiftType)
 {
 	ShiftColumnsAt(colItr, columnWidth, shiftType);
 

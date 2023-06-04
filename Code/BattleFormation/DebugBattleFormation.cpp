@@ -18,11 +18,11 @@ namespace
 
 void CDebugBattleFormation::Initialize()
 {
-	if (!m_formation)
+	if (!m_pFormation)
 	{
-		m_formation = GetEntity()->GetOrCreateComponent<CBattleFormation>();
+		m_pFormation = GetEntity()->GetOrCreateComponent<CBattleFormation>();
 	}
-	UpdateFormation();
+	UpdateFormationParams();
 }
 
 Cry::Entity::EventFlags CDebugBattleFormation::GetEventMask() const
@@ -46,23 +46,41 @@ void CDebugBattleFormation::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
-void CDebugBattleFormation::UpdateFormation()
+void CDebugBattleFormation::UpdateFormationParams()
 {
-	if (m_formationParams.columnParams.Size() == 0)
-	{
-		m_formation->ClearSlots();
-	}
-
 	for (uint columnIndex = 0; columnIndex < m_formationParams.columnParams.Size(); ++columnIndex)
 	{
 		IFormationColumn* pColumn = m_formationParams.columnParams.At(columnIndex).pColumn;
 		if (!pColumn)
 		{
-			InsertNewColumnAndUnit(columnIndex);
+			m_pFormation->InsertColumnAndUnit(columnIndex, nullptr, IBattleFormation::EColumnShiftType::Right);
+			if (m_formationParams.columnParams.At(columnIndex).slotParams.Size() == 0)
+			{
+				m_formationParams.columnParams.At(columnIndex).slotParams.PushBack(SSlotParams());
+			}
+			m_formationParams.columnParams.At(columnIndex).pColumn = m_pFormation->GetColumn(columnIndex);
+			m_formationParams.columnParams.At(columnIndex).slotParams.At(0).pSlot = m_pFormation->GetSlot(columnIndex, 0);
 		}
-		else if (pColumn != m_formation->GetColumn(columnIndex))
+		else if (pColumn != m_pFormation->GetColumn(columnIndex))
 		{
-			RemoveColumn(columnIndex);
+			m_pFormation->RemoveColumn(columnIndex);
+			--columnIndex;
+			continue;
+		}
+		else if (m_formationParams.columnParams.At(columnIndex).slotParams.Size() == 0)
+		{
+			if (m_pFormation->GetSlotCountInColumn(columnIndex) == 1)
+			{
+				m_pFormation->RemoveSlot(columnIndex, 0);
+			}
+			m_pFormation->RemoveColumn(columnIndex);
+			for (int columnShiftIndex = columnIndex + 1; columnShiftIndex < m_formationParams.columnParams.Size(); ++columnShiftIndex)
+			{
+				m_formationParams.columnParams.At(columnShiftIndex - 1) = m_formationParams.columnParams.At(columnShiftIndex);
+			}
+			m_formationParams.columnParams.PopBack();
+			--columnIndex;
+			continue;
 		}
 
 		for (uint slotIndex = 0; slotIndex < m_formationParams.columnParams.At(columnIndex).slotParams.Size(); ++slotIndex)
@@ -70,51 +88,35 @@ void CDebugBattleFormation::UpdateFormation()
 			IFormationSlot* pSlot = m_formationParams.columnParams.At(columnIndex).slotParams.At(slotIndex).pSlot;
 			if (!pSlot)
 			{
-				InsertNewUnitInColumn(columnIndex, slotIndex);
+				m_pFormation->InsertUnitInColumn(columnIndex, slotIndex, nullptr);
+				m_formationParams.columnParams.At(columnIndex).slotParams.At(slotIndex).pSlot = m_pFormation->GetSlot(columnIndex, slotIndex);
 			}
-			else if (pSlot != m_formation->GetSlot(columnIndex, slotIndex))
+			else if (pSlot != m_pFormation->GetSlot(columnIndex, slotIndex))
 			{
-				RemoveSlotInColumn(columnIndex, slotIndex);
+				m_pFormation->RemoveSlot(columnIndex, slotIndex);
+				--slotIndex;
 			}
 		}
 	}
 
-	for (uint columnIndex = 0; columnIndex < m_formationParams.columnParams.Size(); ++columnIndex)
+	for (uint columnIndex = 0; columnIndex < m_pFormation->GetColumnCount(); ++columnIndex)
 	{
-		for (uint lastSlotIndex = m_formation->GetSlotCountInColumn(columnIndex) - 1; lastSlotIndex >= m_formationParams.columnParams.At(columnIndex).slotParams.Size(); --lastSlotIndex)
+		uint slotDifference = m_pFormation->GetSlotCountInColumn(columnIndex) - m_formationParams.columnParams.At(columnIndex).slotParams.Size();
+		while (slotDifference != 0)
 		{
-			RemoveSlotInColumn(columnIndex, lastSlotIndex);
+			m_pFormation->RemoveSlot(columnIndex, m_pFormation->GetSlotCountInColumn(columnIndex) - slotDifference);
+			--slotDifference;
+		}
+		if (m_pFormation->IsColumnEmpty(columnIndex))
+		{
+			m_pFormation->RemoveColumn(columnIndex);
 		}
 	}
-	for (uint lastColumnIndex = m_formation->GetColumnCount() - 1; lastColumnIndex >= m_formationParams.columnParams.Size(); --lastColumnIndex)
+	uint columnDifference = m_pFormation->GetColumnCount() - m_formationParams.columnParams.Size();
+	while (columnDifference != 0)
 	{
-		RemoveColumn(lastColumnIndex);
+		m_pFormation->RemoveColumn(m_pFormation->GetColumnCount() - columnDifference);
+		--columnDifference;
 	}
 }
 
-void CDebugBattleFormation::InsertNewColumnAndUnit(uint columnIndex)
-{
-	m_formation->InsertColumnAndUnit(columnIndex, nullptr, IBattleFormation::EColumnShiftType::Right);
-	if (m_formationParams.columnParams.At(columnIndex).slotParams.Size() == 0)
-	{
-		m_formationParams.columnParams.At(columnIndex).slotParams.PushBack(SSlotParams());
-	}
-	m_formationParams.columnParams.At(columnIndex).pColumn = m_formation->GetColumn(columnIndex);
-	m_formationParams.columnParams.At(columnIndex).slotParams.At(0).pSlot = m_formation->GetSlot(columnIndex, 0);
-}
-
-void CDebugBattleFormation::InsertNewUnitInColumn(uint columnIndex, uint slotIndex)
-{
-	m_formation->InsertUnitInColumn(columnIndex, slotIndex, nullptr);
-	m_formationParams.columnParams.At(columnIndex).slotParams.At(slotIndex).pSlot = m_formation->GetSlot(columnIndex, slotIndex);
-}
-
-void CDebugBattleFormation::RemoveColumn(uint columnIndex)
-{
-	m_formation->RemoveColumn(columnIndex);
-}
-
-void CDebugBattleFormation::RemoveSlotInColumn(uint columnIndex, uint slotIndex)
-{
-	m_formation->RemoveSlot(columnIndex, slotIndex);
-}

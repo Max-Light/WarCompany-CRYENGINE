@@ -8,12 +8,13 @@ struct IBattleFormation;
 
 namespace FormationSystem
 {
-	enum class EFormationEvent : uint8
+	enum class EFormationEvent : uint16
 	{
 		ADD_SLOT = BIT8(1),
 		REMOVE_SLOT = BIT8(2),
 		ADD_COLUMN = BIT8(3),
-		REMOVE_COLUMN = BIT(4)
+		REMOVE_COLUMN = BIT(4),
+		CLEAR = BIT(5)
 	};
 	typedef CEnumFlags<EFormationEvent> FormationEventFlags;
 	CRY_CREATE_ENUM_FLAG_OPERATORS(EFormationEvent);
@@ -107,6 +108,9 @@ struct IBattleFormation : public IEntityComponent
 	// Returns true if the formation has no slots
 	virtual bool IsEmpty() const = 0;
 
+	// Returns true if no slots are residing in the column
+	virtual bool IsColumnEmpty(uint columnIndex) const = 0;
+
 	// Inserts a new column in the formation containing the inserted unit
 	virtual IFormationSlot* InsertColumnAndUnit(uint column, IFormationUnit* pUnit, EColumnShiftType shiftType) = 0;
 
@@ -114,10 +118,10 @@ struct IBattleFormation : public IEntityComponent
 	virtual IFormationSlot* InsertUnitInColumn(uint columnIndex, uint slotIndex, IFormationUnit* pUnit) = 0;
 
 	// Remove the column and its containing slots at the specified index
-	virtual void RemoveColumn(uint columnIndex) = 0;
+	virtual void RemoveColumn(uint columnIndex, EColumnShiftType shiftType = EColumnShiftType::Right) = 0;
 
 	// Remove the column and its containing slots
-	virtual bool RemoveColumn(IFormationColumn* pColumn) = 0;
+	virtual bool RemoveColumn(IFormationColumn* pColumn, EColumnShiftType shiftType = EColumnShiftType::Right) = 0;
 
 	// Removes the slot at the specified index
 	virtual void RemoveSlot(uint columnIndex, uint slotIndex) = 0;

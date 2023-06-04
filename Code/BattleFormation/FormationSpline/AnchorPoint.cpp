@@ -6,6 +6,7 @@
 #include <CryCore/StaticInstanceList.h>
 
 #include <DefaultComponents/Physics/SpherePrimitiveComponent.h>
+#include <CryRenderer/IRenderAuxGeom.h>
 
 namespace
 {

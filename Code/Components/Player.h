@@ -72,12 +72,12 @@ protected:
 		void SerializeWith(TSerialize ser)
 		{
 			// Serialize the position with the 'wrld' compression policy
-			ser.Value("pos", position, 'wrld');
+			ser.Value("pos", gridPosition, 'wrld');
 			// Serialize the rotation with the 'ori0' compression policy
 			ser.Value("rot", rotation, 'ori0');
 		}
 		
-		Vec3 position;
+		Vec3 gridPosition;
 		Quat rotation;
 	};
 	// Remote method intended to be called on all remote clients when a player spawns on the server

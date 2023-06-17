@@ -1,7 +1,7 @@
 #pragma once
 
 #include "StdAfx.h"
-#include "BattleFormation/IFormationUnit.h"
+#include "IFormationUnit.h"
 
 struct IFormationSlot
 {
@@ -13,8 +13,11 @@ struct IFormationSlot
 	// Return the size of the slot
 	virtual Vec3 GetSize() const = 0;
 
-	// Return the position of the slot in local space
+	// Return the position of the slot 
 	virtual Vec3 GetPos() const = 0;
+
+	// Returns the grid position within the formation
+	virtual Vec2 GetGridPos() const = 0;
 
 	// Returns true if the formation unit is on the slots position
 	virtual bool IsFormationReady() const = 0;

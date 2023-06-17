@@ -1,13 +1,33 @@
 #pragma once
 
-#include "BattleFormation/IFormationSlot.h"
+#include "IFormationSlot.h"
+#include "IBattleFormation.h"
 
 #include <CryEntitySystem/IEntityComponent.h>
 #include <CrySchematyc/CoreAPI.h>
 
+struct SSlotSpawnParams
+{
+	IBattleFormation* pFormation = nullptr;
+	IFormationUnit* pUnit = nullptr;
+	Vec2 gridPosition;
+	Vec3 slotSize;
+};
 
 class CFormationSlot : public IEntityComponent, public IFormationSlot
 {
+public:
+	struct SSlotProperties
+	{
+		void Serialize(Serialization::IArchive& archive)
+		{
+			archive(unitId, "UnitEntity", "Unit Entity");
+			//archive(gridPos, "GridPosition", "Grid Position");
+		}
+
+		EntityId unitId = 0;
+		Vec2 gridPos;
+	};
 public:
 	CFormationSlot() = default;
 	virtual ~CFormationSlot() override = default;
@@ -33,15 +53,32 @@ public:
 
 	// IFormationSlot
 	virtual IFormationUnit* GetUnit() const override { return m_pUnit; }
-	virtual Vec3 GetSize() const override { return m_boundingBox.GetSize(); }
-	virtual Vec3 GetPos() const override { return m_pEntity->GetPos(); }
+	virtual Vec3 GetSize() const override { return m_slotSize; }
+	virtual Vec3 GetPos() const override { return GetEntity()->GetPos(); }
+	virtual Vec2 GetGridPos() const override { return GetEntity()->GetPos(); }
 	virtual bool IsFormationReady() const override;
 	// ~IFormationSlot
 
-	void SetPos(const Vec3& position);
+	// Set the world position of the slot
+	void SetPos(const Vec2& gridPosition);
+
+	// Set the size of the slot
 	void SetSize(const Vec3& size);
+
+	// Assign the unit occupying this slot
 	void AssignUnit(IFormationUnit* pUnit) { m_pUnit = pUnit; }
+
+	// Spawns a formation slot
+	static CFormationSlot* CreateSlot(const SSlotSpawnParams& slotParams);
+
+	// Destroy this slot instance
+	inline void Destroy() { gEnv->pEntitySystem->RemoveEntity(GetEntityId()); }
+
+	// Return the slot properties
+	SSlotProperties GetSlotProperties() const;
 protected:
+	IBattleFormation* m_pFormation = nullptr;
 	IFormationUnit* m_pUnit = nullptr;
-	AABB m_boundingBox;
+	Vec3 m_slotSize;
 };
+

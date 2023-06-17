@@ -1,50 +1,85 @@
 #pragma once
 
 #include "IBattleFormation.h"
-#include "BattleFormationColumn.h"
+#include "FormationColumn.h"
+
+typedef CFormationColumn FormationColumn;
+typedef std::vector<FormationColumn*> ColumnCollection;
 
 class CBattleFormation : public IBattleFormation
 {
 public:
-	// shifts the position of columns up and down the formation line
-	struct IColumnVerticalityHandler
+	struct SFormationProperties
 	{
-		float GetColumnVerticalOffset(IBattleFormationColumn* pColumn) const { return 0; }
-	};
-
-	struct IBattleFormationColumnObserver
-	{
-		enum class EActionType
+		void Serialize(Serialization::IArchive& archive)
 		{
-			ColumnAdd,
-			ColumnRemove,
-		};
+			archive(columnProperties, "Columns", "Columns");
+		}
 
-		virtual void OnFormationColumn(const EActionType& action, IBattleFormationColumn* pColumn) = 0;
+		std::vector<FormationColumn::SColumnProperties> columnProperties;
 	};
-protected:
-	using TColumnCollection = std::vector<CBattleFormationColumn>;
-	using TSlotCollection = CBattleFormationColumn::TSlotCollection;
 
-	struct SBattleFormationIterator
+	using ColumnItr = ColumnCollection::const_iterator;
+	using SlotItr = FormationColumn::SlotItr;
+
+	class CFormationIterator
 	{
-		SBattleFormationIterator() = default;
-		SBattleFormationIterator(const TColumnCollection::iterator& colItr)
-			: colItr(colItr)
-			, slotItr(colItr->GetSlots()->begin())
-		{}
-		SBattleFormationIterator(const TColumnCollection::iterator& colItr, const TSlotCollection::iterator& slotItr)
-			: colItr(colItr)
-			, slotItr(slotItr)
-		{}
-		virtual ~SBattleFormationIterator() = default;
+	public:
+		CFormationIterator() = default;
+		CFormationIterator(const ColumnItr& columnItr, const SlotItr& slotItr)
+			: m_columnItr(columnItr)
+			, m_slotItr(slotItr)
+		{
+		}
 
-		TColumnCollection::iterator colItr;
-		TSlotCollection::iterator slotItr;
+		// Shift the iterator to the next column
+		inline void NextColumn() { ++m_columnItr; m_slotItr = (*m_columnItr)->GetStartSlot(); }
+
+		// Shift the iterator to the previous column
+		inline void PrevColumn() { --m_columnItr; m_slotItr = (*m_columnItr)->GetStartSlot(); }
+
+		// Shift the slot iterator down in the current column
+		inline void MoveDown() { ++m_slotItr; }
+
+		// Shift the slot iterator up in the current column
+		inline void MoveUp() { --m_slotItr; }
+
+		// Return the column at the iterator location
+		inline CFormationColumn* GetColumn() const { return *m_columnItr; }
+
+		// Return the slot at the iterator location
+		inline CFormationSlot* GetSlot() const { return *m_slotItr; }
+
+		// Return the column iterator
+		inline const ColumnItr& GetColumnItr() const { return m_columnItr; }
+
+		// Return the slot iterator
+		inline const SlotItr& GetSlotItr() const { return m_slotItr; }
+
+		// Places the slot iterator onto the specified slot pointer, otherwise returns false if slot not found
+		inline bool GoToSlot(IFormationSlot* pSlot) 
+		{ 
+			SlotItr slotItr = GetColumn()->FindSlot(pSlot); 
+			if (slotItr != GetColumn()->GetEndSlot()) 
+			{
+				m_slotItr = slotItr;
+				return true;
+			} 
+			return false;
+		}
+	private:
+		ColumnItr m_columnItr;
+		SlotItr m_slotItr;
 	};
+	using FormationItr = CFormationIterator;
 public:
 	CBattleFormation() = default;
 	virtual ~CBattleFormation() = default;
+
+	void Serialize(Serialization::IArchive& archive)
+	{
+		
+	}
 
 	static void ReflectType(Schematyc::CTypeDesc<CBattleFormation>& desc)
 	{
@@ -52,6 +87,11 @@ public:
 		desc.SetEditorCategory("Battle Formation");
 		desc.SetLabel("Battle Formation");
 		desc.SetDescription("Create an organized unit formation.");
+		desc.SetComponentFlags(EntityComponentFlags(
+			{
+				EEntityComponentFlags::Singleton
+			}
+		));
 	}
 
 	// IEntityComponent
@@ -61,52 +101,68 @@ public:
 	// ~IEntityComponent
 
 	// IBattleFormation
-	virtual IFormationSlot* GetSlot(uint x, uint y) const override { return (*m_formationColumns[x].GetSlots())[y]; }
-	virtual uint GetColumnCount() const override { return m_formationColumns.size(); }
-	virtual uint GetSlotCountInColumn(uint col) const override { return m_formationColumns[col].GetSlots()->size(); }
-	virtual uint GetSlotCount() const override;
-	virtual IFormationSlot* InsertColumnAndUnit(uint col, SSlotSpawnParams& slotParams, EColumnShiftType shiftType = EColumnShiftType::Right) override;
-	virtual IFormationSlot* InsertUnitInColumn(uint col, uint depth, SSlotSpawnParams& slotParams) override;
-	virtual void RemoveSlot(uint x, uint y) override;
-	virtual void RemoveSlot(IFormationSlot* pSlot) override;
+	inline virtual Vec2 GetPos() const { return GetEntity()->GetWorldPos(); }
+	inline virtual Quat GetRotation() const { return GetEntity()->GetWorldRotation(); }
+	inline virtual IFormationSlot* GetSlot(uint columnIndex, uint index) const override { return m_formationColumns[columnIndex]->GetSlotAt(index); }
+	inline virtual IFormationColumn* GetColumn(uint columnIndex) const override { return m_formationColumns[columnIndex]; }
+	inline virtual uint GetSlotCount() const override;
+	inline virtual uint GetColumnCount() const override { return m_formationColumns.size(); }
+	inline virtual uint GetSlotCountInColumn(uint columnIndex) const override{ return m_formationColumns[columnIndex]->GetSlotCount(); }
+	inline virtual Vec3 GetBattleLineDirection() const { return GetEntity()->GetRightDir() * GetBattleLineLength(); }
+	inline virtual float GetBattleLineLength() const override;
+	inline virtual bool IsEmpty() const { return m_formationColumns.empty(); }
+	inline virtual bool IsColumnEmpty(uint columnIndex) const { return (*m_formationColumns[columnIndex]).IsEmpty(); }
+	virtual IFormationSlot* InsertColumnAndUnit(uint columnIndex, IFormationUnit* pUnit, EColumnShiftType shiftType = EColumnShiftType::Right) override;
+	virtual IFormationSlot* InsertUnitInColumn(uint columnIndex, uint depth, IFormationUnit* pUnit) override;
+	virtual void RemoveColumn(uint columnIndex, EColumnShiftType shiftType = EColumnShiftType::Right) override;
+	virtual bool RemoveColumn(IFormationColumn* pColumn, EColumnShiftType shiftType = EColumnShiftType::Right) override;
+	virtual void RemoveSlot(uint columnIndex, uint index) override;
+	virtual bool RemoveSlot(IFormationSlot* pSlot) override;
+	virtual void ClearSlots() override;
+	virtual Vec3 CreatePos(const Vec2& gridPos) override;
+	inline virtual void AddBattleFormationListener(IBattleFormationListener* listener) { m_eventListeners.push_back(listener); }
+	inline virtual void RemoveBattleFormationListener(IBattleFormationListener* listener) { m_eventListeners.erase(std::find(m_eventListeners.begin(), m_eventListeners.end(), listener)); }
 	// ~IBattleFormation
 
-	// Register a column verticality handler
-	void RegisterColumnVerticalityHandler(IColumnVerticalityHandler* pHandler) { m_columnVerticalHandlers.push_back(pHandler); }
+	inline FormationItr GetBeginFormationItr() const { return FormationItr(m_formationColumns.begin(), (*m_formationColumns.begin())->GetStartSlot()); }
+	inline FormationItr GetFormationItr(uint columnIndex, uint slotIndex) const 
+	{ 
+		CRY_ASSERT(columnIndex < GetColumnCount(), "Column index out of range!");
+		CRY_ASSERT(slotIndex < (m_formationColumns[columnIndex])->GetSlotCount(), "Slot index out of range in Column!");
+		ColumnItr columnItr = m_formationColumns.begin() + columnIndex;
+		return FormationItr(columnItr, (*columnItr)->GetStartSlot() + slotIndex); 
+	}
 
-	// Unregister a column verticality handler
-	void UnregisterColumnVerticalityHandler(IColumnVerticalityHandler* pHandler) { m_columnVerticalHandlers.erase(std::find(m_columnVerticalHandlers.begin(), m_columnVerticalHandlers.end(), pHandler)); }
+	// Remove the column at the specified column iterator
+	void RemoveColumn(ColumnItr& columnItr, EColumnShiftType shiftType);
+
+	// Remove the slot at the specified formation iterator 
+	void RemoveSlot(const FormationItr& formationItr);
+
+	// Return the formation properties
+	SFormationProperties GetFormationProperties() const;
 protected:
-	// Spawns a slot local to the formation
-	CFormationSlot* SpawnSlot(const SSlotSpawnParams& slotParams, const Vec3& pos);
-
-	// Query the positional point where a slot would be placed in the formation grid
-	Vec3 QuerySlotPosition(const SBattleFormationIterator& itr, const SSlotSpawnParams& slotParams) const;
-
 	// Inserts a new column in the formation
-	TColumnCollection::iterator InsertColumnAt(TColumnCollection::iterator colItr, float columnWidth, const EColumnShiftType& shiftType);
+	ColumnItr InsertColumnAt(ColumnItr colItr, float columnWidth, const EColumnShiftType& shiftType);
 
 	// Shift columns right and left on the horizontal axis in the formation
-	void ShiftColumnsAt(const TColumnCollection::iterator& colItr, float offset, const EColumnShiftType& shiftType = EColumnShiftType::Right);
+	void ShiftColumnsAt(const ColumnItr& colItr, float offset, const EColumnShiftType& shiftType = EColumnShiftType::Right);
 
-	// Shift all slots in the column range by the offset
-	void ShiftSlotsInColumnRange(TColumnCollection::iterator startItr, const TColumnCollection::iterator& endItr, float offset);
+	// Helper function that shifts all slots in the column range by the offset
+	inline void ShiftColumnRange(ColumnItr startItr, const ColumnItr& endItr, float offset);
 
-	// Shift slots within a column up and down
-	void ShiftSlotsInColumn(TSlotCollection::iterator startItr, const TSlotCollection::iterator& endItr, float offset);
-
-	// Retrieve the column's vertical offset
-	float GetColumnOffset(IBattleFormationColumn* pColumn) const;
-
-	// Returns the terrain point position local to the formation
-	Vec3 GetTerrainPosition(Vec2 gridPosition) const;
+	// Update slot positions within the column range
+	void UpdateSlotsInColumnRange(ColumnItr startItr, const ColumnItr& endItr);
 
 	// Iterate over all slots in the formation
 	void IterateSlots(std::function<void(CFormationSlot& slot)> func) const;
 
 	// Update all slots to the new position
-	void UpdateAllSlotPos() const;
+	void UpdateAllSlotPos();
+
+	// Helper function to notify all listeners of the event
+	inline void NotifyBattleFormationListeners(const SBattleFormationEvent& formationEvent) const { for (IBattleFormationListener* listener : m_eventListeners) { listener->OnBattleFormationEvent(formationEvent); } }
 protected:
-	TColumnCollection m_formationColumns;
-	std::vector<IColumnVerticalityHandler*> m_columnVerticalHandlers;
+	ColumnCollection m_formationColumns;
+	std::vector<IBattleFormationListener*> m_eventListeners;
 };

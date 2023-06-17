@@ -1,41 +1,59 @@
 #pragma once
 
 #include "IVertexPoint.h"
+#include "IBattleLineSpline.h"
 
-class CBattleLineSpline;
+#include <CryEntitySystem/IEntityComponent.h>
 
-class CVertexPoint : public IVertexPoint
+struct SVertexSpawnParams
 {
-public:
-	// relative position the vertex is pointing to on the formation
-	struct SFormationRef
-	{
-		uint columnIndex;
-		float normalizedValue;
+	SVertexSpawnParams() = default;
 
-		bool operator<(const SFormationRef& other) { return columnIndex < other.columnIndex && normalizedValue < other.normalizedValue; }
-		bool operator>(const SFormationRef& other) { return columnIndex > other.columnIndex && normalizedValue > other.normalizedValue; }
-		bool operator<=(const SFormationRef& other) { return columnIndex <= other.columnIndex && normalizedValue <= other.normalizedValue; }
-		bool operator>=(const SFormationRef& other) { return columnIndex >= other.columnIndex && normalizedValue >= other.normalizedValue; }
-	};
+	IBattleLineSpline* pSpline = nullptr;
+	Vec2 gridPosition = ZERO;
+};
+
+class CVertexPoint : public IVertexPoint, public IEntityComponent
+{
 public:
 	CVertexPoint() = default;
 	virtual ~CVertexPoint() override = default;
 
-	// IVertexPoint
+	void Serialize(Serialization::IArchive& archive)
+	{
+		
+	}
+
+	static void ReflectType(Schematyc::CTypeDesc<CVertexPoint>& desc)
+	{
+		desc.SetGUID("{FF349F10-73BF-4653-965B-1C27F47CA957}"_cry_guid);
+		desc.SetLabel("Vertex Point");
+		desc.SetDescription("A vertex point attached to a battle line spline.");
+		desc.SetComponentFlags(EntityComponentFlags(
+			{
+				EEntityComponentFlags::HiddenFromUser,
+				EEntityComponentFlags::HideFromInspector
+			}
+		));
+	}
+
+	// IEntityComponent
 	virtual void Initialize() override;
 	virtual Cry::Entity::EventFlags GetEventMask() const override;
 	virtual void ProcessEvent(const SEntityEvent& event) override;
+	// ~IEntityComponent
 
-	virtual Vec3 GetPosition() const override { return m_position; }
-	virtual void MoveToPosition(const Vec3& pos) override;
+	// ISplinePoint
+	virtual Vec3 GetPos() const override { return GetEntity()->GetPos(); }
+	virtual void SetPos(const Vec2& gridPosition) override;
+	// ~ISplinePoint
+
+	// IVertexPoint
+	virtual float GetBattleLineXPos() const override { return GetEntity()->GetPos().x; }
 	// ~IVertexPoint
 
-	void SetPosition(const Vec3& pos) { m_position = pos; }
-
-	// return the relative formation position 
-	SFormationRef GetFormationReference() const { return m_formationRef; }
+	// Spawns a vertex point
+	static CVertexPoint* CreateVertex(SVertexSpawnParams& vertexParams);
 private:
-	SFormationRef m_formationRef;
-	Vec3 m_position;
+	IBattleLineSpline* m_pSpline = nullptr;
 };

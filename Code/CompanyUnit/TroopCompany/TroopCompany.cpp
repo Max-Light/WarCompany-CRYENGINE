@@ -3,6 +3,7 @@
 
 #include <CrySchematyc/Env/Elements/EnvComponent.h>
 #include <CryCore/StaticInstanceList.h>
+#include <CryRenderer/IRenderAuxGeom.h>
 
 namespace
 {

@@ -214,7 +214,7 @@ void CPlayerComponent::OnReadyForGameplayOnServer()
 bool CPlayerComponent::RemoteReviveOnClient(RemoteReviveParams&& params, INetChannel* pNetChannel)
 {
 	// Call the Revive function on this client
-	Revive(Matrix34::Create(Vec3(1.f), params.rotation, params.position));
+	Revive(Matrix34::Create(Vec3(1.f), params.rotation, params.gridPosition));
 
 	return true;
 }

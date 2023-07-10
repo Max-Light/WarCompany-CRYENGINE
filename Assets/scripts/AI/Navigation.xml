@@ -46,8 +46,10 @@
 	</AreaTypes>
 	
 	<AgentTypes>
-		<AgentType name="TroopCompany" voxelSize="0.125, 0.125, 0.125" radius="4" height="2" climbableHeight="3" climbableInclineGradient="1" climbableStepRatio="1" maxWaterDepth="8">
+		<AgentType name="TroopCompany" voxelSize="0.125, 0.125, 0.125" radius="4" height="2" climbableHeight="3" climbableInclineGradient="1" climbableStepRatio="1" maxWaterDepth="0">
 		</AgentType>
+    <AgentType name="TroopUnit" voxelSize="0.125, 0.125, 0.125" radius="4" height="2" climbableHeight="3" climbableInclineGradient="1" climbableStepRatio="1" maxWaterDepth="0">
+    </AgentType>
 	</AgentTypes>
 	
 </Navigation>

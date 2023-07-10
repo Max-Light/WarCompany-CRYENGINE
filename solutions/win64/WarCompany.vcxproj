@@ -290,7 +290,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Code\BattleFormation\IBattleFormation.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\GamePlugin.cpp" />
     <ClCompile Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -305,14 +304,24 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\GamePlugin.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\StdAfx.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\CompanyUnit.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\CompanyUnit.cpp" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopUnit.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopUnit.cpp" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompany.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompany.cpp" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompanyClass.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompanyClass.cpp" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\ITroopUnitSystem.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnitSystem.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnitSystem.cpp" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\CompanyUnit.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\CompanyUnit.cpp" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\ITroopUnitBasicTypes.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\ITroopUnit.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\TroopUnit.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\TroopUnit.cpp" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\ITroopUnitClass.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\TroopUnitClass.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\TroopUnitClass.cpp" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\ITroopCompany.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\TroopCompany.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\TroopCompany.cpp" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\ITroopCompanyClass.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\TroopCompanyClass.h" />
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\TroopCompanyClass.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationUnit.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationSlot.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\FormationSlot.cpp" />
@@ -346,7 +355,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">StdAfx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\solutions\win64\CompanyUnits_uber.cpp">
+    <ClCompile Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\solutions\win64\TroopUnitSystem_uber.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">StdAfx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>

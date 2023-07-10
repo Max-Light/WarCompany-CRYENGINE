@@ -6,6 +6,7 @@
 #include <CryEntitySystem/IEntityClass.h>
 #include <CryNetwork/INetwork.h>
 
+struct ITroopUnitSystem;
 class CPlayerComponent;
 
 // The entry-point of the application
@@ -57,8 +58,11 @@ public:
 	{
 		return cryinterface_cast<CGamePlugin>(CGamePlugin::s_factory.CreateClassInstance().get());
 	}
-	
+
+	inline ITroopUnitSystem* GetTroopUnitSystem() const { return m_pTroopUnitSystem; }
 protected:
 	// Map containing player components, key is the channel id received in OnClientConnectionReceived
 	std::unordered_map<int, EntityId> m_players;
+
+	ITroopUnitSystem* m_pTroopUnitSystem = nullptr;
 };

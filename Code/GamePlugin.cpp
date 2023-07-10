@@ -4,6 +4,7 @@
 
 #include "Components/Player.h"
 #include "Components/StdComponent.h"
+#include "TroopUnitSystem/TroopUnitSystem.h"
 
 #include <IGameObjectSystem.h>
 #include <IGameObject.h>
@@ -35,6 +36,10 @@ bool CGamePlugin::Initialize(SSystemGlobalEnvironment& env, const SSystemInitPar
 {
 	// Register for engine system events, in our case we need ESYSTEM_EVENT_GAME_POST_INIT to load the map
 	gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this, "CGamePlugin");
+
+	CTroopUnitSystem* pTroopUnitSystem = new CTroopUnitSystem();
+	m_pTroopUnitSystem = pTroopUnitSystem;
+
 	return true;
 }
 

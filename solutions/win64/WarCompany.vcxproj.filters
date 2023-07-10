@@ -5,7 +5,7 @@
     <ClCompile Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\solutions\win64\Code_uber.cpp">
       <Filter>UBER FILES</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\solutions\win64\CompanyUnits_uber.cpp">
+    <ClCompile Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\solutions\win64\TroopUnitSystem_uber.cpp">
       <Filter>UBER FILES</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\solutions\win64\BattleFormation_uber.cpp">
@@ -19,29 +19,59 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\GamePlugin.cpp" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\GamePlugin.h" />
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\StdAfx.h" />
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\CompanyUnit.h">
-      <Filter>Company Unit</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\ITroopUnitSystem.h">
+      <Filter>Troop Unit System</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\CompanyUnit.cpp">
-      <Filter>Company Unit</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnitSystem.h">
+      <Filter>Troop Unit System</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopUnit.h">
-      <Filter>Company Unit\Troop Company</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnitSystem.cpp">
+      <Filter>Troop Unit System</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopUnit.cpp">
-      <Filter>Company Unit\Troop Company</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\CompanyUnit.h">
+      <Filter>Troop Unit System</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompany.h">
-      <Filter>Company Unit\Troop Company</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\CompanyUnit.cpp">
+      <Filter>Troop Unit System</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompany.cpp">
-      <Filter>Company Unit\Troop Company</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\ITroopUnitBasicTypes.h">
+      <Filter>Troop Unit System\Troop Unit</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompanyClass.h">
-      <Filter>Company Unit\Troop Company</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\ITroopUnit.h">
+      <Filter>Troop Unit System\Troop Unit</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CompanyUnit\TroopCompany\TroopCompanyClass.cpp">
-      <Filter>Company Unit\Troop Company</Filter>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\TroopUnit.h">
+      <Filter>Troop Unit System\Troop Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\TroopUnit.cpp">
+      <Filter>Troop Unit System\Troop Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\ITroopUnitClass.h">
+      <Filter>Troop Unit System\Troop Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\TroopUnitClass.h">
+      <Filter>Troop Unit System\Troop Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopUnit\TroopUnitClass.cpp">
+      <Filter>Troop Unit System\Troop Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\ITroopCompany.h">
+      <Filter>Troop Unit System\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\TroopCompany.h">
+      <Filter>Troop Unit System\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\TroopCompany.cpp">
+      <Filter>Troop Unit System\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\ITroopCompanyClass.h">
+      <Filter>Troop Unit System\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\TroopCompanyClass.h">
+      <Filter>Troop Unit System\Troop Company</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\TroopUnitSystem\TroopCompany\TroopCompanyClass.cpp">
+      <Filter>Troop Unit System\Troop Company</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\BattleFormation\IFormationUnit.h">
       <Filter>Battle Formation</Filter>
@@ -109,9 +139,6 @@
     <ClInclude Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\Components\StdComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Code\BattleFormation\IBattleFormation.h">
-      <Filter>Battle Formation</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\Maxwell\Documents\CRYENGINE Projects\WarCompany\Code\CMakeLists.txt" />
@@ -131,17 +158,20 @@
     <Filter Include="Battle Formation\Formation Spline">
       <UniqueIdentifier>{FC10AB50-7D57-3097-8619-CBE391AC9D5E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Company Unit">
-      <UniqueIdentifier>{CE539C0D-9623-3C79-9756-FDB56C8E8D04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Company Unit\Troop Company">
-      <UniqueIdentifier>{192BF244-6186-31BF-9602-AEB3C5763A5D}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{4B9370F2-D6AF-302B-8DC1-495BE70F7ED3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{9E877F13-83F5-3A28-9B27-E11A1C660AF5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Troop Unit System">
+      <UniqueIdentifier>{A3064633-410D-3358-BA78-11B9BA883E2C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Troop Unit System\Troop Company">
+      <UniqueIdentifier>{379CE12D-8735-3E11-98BC-EE54CE029A75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Troop Unit System\Troop Unit">
+      <UniqueIdentifier>{A48545E1-ED9C-37E8-A24F-2A5DB43960BD}</UniqueIdentifier>
     </Filter>
     <Filter Include="UBER FILES">
       <UniqueIdentifier>{98A95266-8D39-3A7A-91D6-DA68ADF8E0EE}</UniqueIdentifier>

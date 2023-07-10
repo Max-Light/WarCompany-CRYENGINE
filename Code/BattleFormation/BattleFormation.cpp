@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "BattleFormation.h"
-#include "CompanyUnit/TroopCompany/TroopCompany.h"
+#include "CompanyUnitSystem/TroopCompany/TroopCompany.h"
 
 #include <CrySchematyc/Env/Elements/EnvComponent.h>
 #include <CryCore/StaticInstanceList.h>
